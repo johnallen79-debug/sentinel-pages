@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ECOS — Excellence in Charitable Operations Standard | Sentinel</title>
+<meta name="description" content="A free governance and operations standard for UK charities. Fourteen domains, 117 requirements, twenty-two templates. No payment, no account.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F9FC; --surface:#FFF; --soft:#EAF2FF; --graphite:#1A2029;
+  --border:rgba(16,35,63,.11); --border2:rgba(16,35,63,.22);
+  --text:#10233F; --dim:#46586F; --faint:#5F7085;
+  --blue:#176BFF; --blue-d:#0F52C9;
+  --amber:#C68A2B; --amber-t:#8A5E12;
+  --green:#2E8666; --green-t:#20624B;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--text);position:relative;overflow-x:hidden;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:16.5px;line-height:1.68;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;letter-spacing:-.015em;line-height:1.14;margin:0 0 .45em}
+h1{font-size:clamp(32px,4vw,44px);font-weight:700}
+h2{font-size:clamp(24px,2.6vw,32px);font-weight:600}
+h3{font-size:17px;font-weight:600;margin-bottom:.35em}
+p{margin:0 0 1em;color:var(--dim)}
+strong{color:var(--text);font-weight:600}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 26px;position:relative;z-index:1}
+
+.circuit{position:absolute;top:0;left:0;right:0;height:620px;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(to bottom,rgba(247,249,252,.30) 0,rgba(247,249,252,.88) 56%,#F7F9FC 92%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cg fill='none' stroke='%23176BFF' stroke-opacity='.10' stroke-width='1'%3E%3Cpath d='M0 64h96l22 22h142M0 190h58l24-24h178'/%3E%3C/g%3E%3Cg fill='%23176BFF' fill-opacity='.14'%3E%3Ccircle cx='96' cy='64' r='2.4'/%3E%3Ccircle cx='58' cy='190' r='2.4'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:100% 100%,260px 260px;background-repeat:no-repeat,repeat}
+
+header{padding:20px 0;position:relative;z-index:2;background:var(--surface);
+  border-bottom:1px solid var(--border)}
+.bar{display:flex;align-items:center;gap:26px}
+.lockup{display:flex;align-items:center;gap:12px;text-decoration:none;flex:none}
+.lockup .mk{width:34px;height:38px;flex:none;display:block}
+.lockup .tx{display:flex;flex-direction:column;line-height:1.1}
+.lockup .nm{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;
+  letter-spacing:-.01em;color:var(--text)}
+.lockup .sub{font-size:10px;font-weight:600;letter-spacing:.19em;text-transform:uppercase;
+  color:var(--faint)}
+nav{margin-left:auto;display:flex;align-items:center;gap:26px}
+nav a.lnk{font-size:14.5px;font-weight:500;color:var(--dim);text-decoration:none;
+  transition:color .18s var(--ease)}
+nav a.lnk:hover{color:var(--text)}
+nav a.lnk[aria-current="page"]{color:var(--text);font-weight:600}
+@media(max-width:960px){nav .hide-sm{display:none}}
+
+.btn{white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  min-height:44px;padding:0 22px;border-radius:999px;text-decoration:none;
+  font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;
+  border:1px solid transparent;cursor:pointer;
+  transition:transform .18s var(--ease),box-shadow .18s var(--ease),background .18s var(--ease)}
+.btn-primary{background:var(--blue);color:#fff}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(23,107,255,.28)}
+.btn-ghost{background:var(--surface);color:var(--text);border-color:var(--border2)}
+.btn-ghost:hover{transform:translateY(-1px);box-shadow:0 5px 14px rgba(16,35,63,.08)}
+.btn svg{transition:transform .18s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+
+.crumb{padding:22px 0 0;font-size:13.5px;color:var(--faint)}
+.crumb a{color:var(--faint);text-decoration:none}
+.crumb a:hover{color:var(--text)}
+
+/* hero */
+.phero{padding:8px 0 8px;display:grid;gap:36px;grid-template-columns:1fr;align-items:center}
+@media(min-width:960px){/* The montage no longer sits beside the copy at all - see .herovid. */}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;background:var(--soft);
+  color:var(--blue-d);border:1px solid rgba(23,107,255,.22);border-radius:999px;padding:6px 16px;
+  font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:20px}
+.phero h1{max-width:22ch}
+.standfirst{font-size:18.5px;color:var(--dim);max-width:56ch;margin-bottom:26px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+
+.portrait{position:relative;margin:0;aspect-ratio:4/5;overflow:hidden;border-radius:18px;
+  background:var(--soft);border:1px solid var(--border)}
+.portrait .still,.portrait .loop{position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:50% 16%;display:block}
+.portrait .loop{opacity:0;transition:opacity .32s var(--ease)}
+.portrait.playing .loop{opacity:1}
+
+/* facts */
+.facts{margin:44px 0 0;padding:24px 0;border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);display:grid;gap:24px;grid-template-columns:1fr 1fr}
+@media(min-width:900px){.facts{grid-template-columns:repeat(4,1fr)}}
+.fact .v{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:28px;
+  color:var(--text);display:block;line-height:1.1}
+.fact .l{font-size:13.5px;color:var(--faint);display:block;margin-top:4px}
+
+/* standard cards */
+.sec{margin:66px 0 0}
+.sec-head{max-width:62ch;margin-bottom:28px}
+.sec-head p:last-child{margin-bottom:0}
+.grid{display:grid;gap:16px;grid-template-columns:1fr}
+@media(min-width:780px){.grid{grid-template-columns:1fr 1fr}}
+.sc{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--border);
+  border-radius:14px;padding:20px 22px;text-decoration:none;color:inherit;
+  transition:transform .18s var(--ease),box-shadow .18s var(--ease),border-color .18s var(--ease)}
+.sc:hover{transform:translateY(-3px);border-color:var(--border2);
+  box-shadow:0 10px 26px rgba(16,35,63,.09)}
+.sc .ttl{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:19px;color:var(--text)}
+.sc .ed{color:var(--faint);display:block;margin:3px 0 10px}
+.sc .cat{font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--blue-d);display:block;margin-bottom:10px}
+.sc .use{font-size:15.5px;color:var(--dim);margin-bottom:18px}
+.sc .meta{margin-top:auto;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  padding-top:14px;border-top:1px solid var(--border)}
+.sc .docs{font-size:13.5px;color:var(--faint)}
+.sc .price{margin-left:auto;font-family:'Space Grotesk',sans-serif;font-weight:600;
+  font-size:16px;color:var(--blue-d)}
+/* Second figure in the card footer. Same size and weight as the document count,
+   pushed to the right: the two are a matched pair, not a headline and a price. */
+.sc .guide{margin-left:auto;font-size:13.5px;color:var(--faint)}
+
+/* pack panel */
+.pack{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:34px}
+@media(min-width:900px){.pack{padding:40px 42px;display:grid;gap:40px;
+  grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);align-items:start}}
+.pack h2{margin-bottom:.3em}
+.pack .buybox{background:var(--soft);border-radius:16px;padding:24px}
+.pack .buybox .amt{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:34px;
+  color:var(--text);display:block;line-height:1.1}
+.pack .buybox .sub{font-size:13.5px;color:var(--faint);display:block;margin:4px 0 18px}
+.pack .buybox .btn{width:100%}
+.pack ul{margin:0 0 18px;padding-left:20px;color:var(--dim)}
+.pack li{margin-bottom:.35em;font-size:15.5px}
+
+/* abi */
+.abi{margin:66px 0 0;background:var(--surface);border:1px solid var(--border);
+  border-radius:20px;padding:38px}
+@media(min-width:1000px){.abi{padding:44px 46px}}
+.abi-head{max-width:64ch;margin-bottom:32px}
+.abi-head p:last-child{margin-bottom:0}
+.abi-grid{display:grid;gap:24px;grid-template-columns:1fr}
+@media(min-width:820px){.abi-grid{grid-template-columns:repeat(3,1fr)}}
+.stepc{border-top:2px solid var(--soft);padding-top:20px}
+.stepc .ic{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;
+  border-radius:12px;background:var(--soft);margin-bottom:14px}
+.stepc .ic svg{width:19px;height:19px;stroke:var(--blue-d);fill:none;stroke-width:2.1;
+  stroke-linecap:round;stroke-linejoin:round}
+.stepc h3{font-size:19px}
+.stepc p{font-size:15px;margin:0}
+
+.candour{margin:52px 0 0;background:var(--surface);border:1px solid var(--border);
+  border-left:3px solid var(--amber);border-radius:14px;padding:24px 26px;max-width:74ch}
+.candour p:last-child{margin-bottom:0}
+
+.cta{margin:60px 0 0;background:var(--graphite);border-radius:20px;padding:46px 40px;
+  text-align:center;color:#fff}
+.cta h2{color:#fff;max-width:22ch;margin-inline:auto}
+.cta p{color:rgba(255,255,255,.74);max-width:54ch;margin:0 auto 24px}
+.cta .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.cta .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.28)}
+.cta .btn-ghost:hover{background:rgba(255,255,255,.07);box-shadow:none}
+
+footer{margin:40px 0 0;padding:24px 0 44px;border-top:1px solid var(--border);
+  display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+footer p{font-size:13.5px;color:var(--faint);margin:0}
+footer .rev{margin-left:auto}
+
+
+/* long-form CMS copy */
+.prose{max-width:70ch}
+.prose p{margin:0 0 1.05em}
+.prose p:last-child{margin-bottom:0}
+.prose h3{font-size:18px;margin:1.6em 0 .5em}
+.prose h3:first-child{margin-top:0}
+.prose ul{margin:0 0 1.05em;padding-left:20px;color:var(--dim)}
+.prose li{margin-bottom:.6em}
+.prose em{color:var(--text);font-style:italic}
+.prose a{color:var(--blue-d)}
+.prose dl{margin:0;display:grid;grid-template-columns:1fr;gap:0}
+@media(min-width:680px){.prose dl{grid-template-columns:minmax(150px,190px) 1fr}}
+.prose dt{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;
+  color:var(--faint);text-transform:uppercase;letter-spacing:.06em;
+  padding:12px 0 2px;border-top:1px solid var(--border)}
+.prose dd{margin:0;color:var(--dim);font-size:15.5px;padding:0 0 12px}
+@media(min-width:680px){.prose dd{padding:12px 0;border-top:1px solid var(--border)}
+  .prose dt{padding:12px 0}}
+.prose dl > dt:first-of-type,.prose dl > dt:first-of-type + dd{border-top:0}
+.prose table{width:100%;border-collapse:collapse;margin:1.2em 0 .4em;font-size:14.5px;
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.prose th,.prose td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--border);
+  color:var(--dim)}
+.prose th{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:12.5px;
+  text-transform:uppercase;letter-spacing:.07em;color:var(--faint)}
+.prose tr:last-child td{border-bottom:0}
+
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px 30px}
+.hook{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--amber);
+  border-radius:16px;padding:28px 30px;max-width:880px}
+.hook .prose{max-width:none}
+.hook .kick{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--amber-t);display:block;margin-bottom:10px}
+.hook h2{font-size:clamp(21px,2.2vw,26px);max-width:32ch}
+.two{display:grid;gap:26px;grid-template-columns:1fr}
+@media(min-width:940px){.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px}}
+.srcs{font-size:13.5px;color:var(--faint);margin-top:14px}
+.srcs a{color:var(--faint)}
+
+@media(max-width:520px){
+  nav{gap:0}
+  nav .btn{font-size:14px;padding:0 16px;min-height:42px}
+  .lockup .mk{width:30px;height:34px}.lockup .nm{font-size:18px}.lockup .sub{font-size:9px}
+  .abi,.pack{padding:28px 22px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .portrait .loop{display:none}
+}
+
+/* the assessment block */
+.assess-block{background:var(--soft)}
+.assess-grid{display:grid;gap:34px;grid-template-columns:1fr}
+.assess-grid h2{margin-top:10px;max-width:28ch}
+.assess-grid .sub{margin-top:14px;font-size:16.5px;max-width:78ch}
+.ticks{margin:22px 0 0;padding:0;list-style:none}
+@media(min-width:900px){.ticks{columns:2;column-gap:40px}
+  .ticks li{break-inside:avoid}}
+.ticks li{position:relative;padding-left:30px;margin-bottom:10px;font-size:15px;color:var(--dim)}
+.ticks li::before{content:"";position:absolute;left:2px;top:8px;width:14px;height:8px;
+  border-left:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:rotate(-45deg)}
+.assess-grid .row{margin-top:26px}
+.tiny{margin-top:12px;font-size:13px;color:var(--faint)}
+
+.assess-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;
+  overflow:hidden;box-shadow:0 1px 2px rgba(15,35,65,.03),0 14px 40px rgba(15,35,65,.07)}
+.assess-head{display:flex;align-items:center;gap:10px;padding:16px 20px;
+  border-bottom:1px solid var(--border);font-family:'Space Grotesk',sans-serif;
+  font-weight:600;font-size:15px;color:var(--text)}
+.assess-head .dot{width:9px;height:9px;border-radius:50%;background:var(--blue)}
+.assess-body{padding:18px 20px 8px}
+.kq{display:grid;grid-template-columns:88px 1fr auto;align-items:center;gap:12px;margin-bottom:14px}
+.kq span{font-size:13.5px;color:var(--dim)}
+.kq em{display:block;height:7px;border-radius:4px;background:var(--soft)}
+.kq i{display:block;height:7px;border-radius:4px;background:var(--blue);opacity:.9}
+.kq b{font-size:11.5px;font-weight:600;color:var(--faint);white-space:nowrap}
+.assess-body .kq::after{content:""}
+.assess-foot{padding:12px 20px 16px;border-top:1px solid var(--border);
+  font-size:12px;color:var(--faint)}
+
+/* the guide section */
+.guide-block{background:var(--surface)}
+.guide-grid{display:grid;gap:18px;grid-template-columns:1fr;margin-top:34px}
+@media(min-width:760px){.guide-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1100px){.guide-grid{grid-template-columns:repeat(3,1fr)}}
+.gcard{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:24px 22px}
+.gcard .gnum{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;
+  letter-spacing:.1em;color:var(--blue)}
+.gcard h3{margin:10px 0 8px;font-family:'Space Grotesk',sans-serif;font-size:17px;
+  font-weight:600;color:var(--text)}
+.gcard p{font-size:14.5px;line-height:1.62;color:var(--dim)}
+
+/* The embedded portal.
+   Sized to the viewport rather than a fixed box, so the assessment gets as much
+   of the screen as there is. It cannot resize its parent - it is an iframe
+   inside the page embed - so the height is set here and the app scrolls within
+   it. min-height keeps it usable on a short laptop screen; max-height stops it
+   growing absurdly tall on a large monitor. */
+.app-frame{padding:0;overflow:hidden;background:var(--surface);border:0;box-shadow:none}
+.app-frame iframe{display:block;width:100%;border:0;
+  height:clamp(620px, calc(100vh - 120px), 1100px)}
+@media(max-width:1000px){.app-frame iframe{height:clamp(560px, calc(100vh - 80px), 900px)}}
+
+/* A label above the frame, so the panel reads as a tool rather than as more
+   page. The border does most of the work; this says what the object is. */
+.app-label{display:flex;align-items:center;gap:9px;margin:0 0 12px;
+  font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:600;color:var(--text)}
+.app-label .dot{width:8px;height:8px;border-radius:50%;background:var(--blue);
+  box-shadow:0 0 0 4px rgba(23,107,255,.14)}
+.app-label em{margin-left:auto;font-style:normal;font-size:12px;font-weight:500;color:var(--faint)}
+
+/* registration, not certification */
+.reg-block{background:var(--surface)}
+.reg-grid{display:grid;gap:18px;grid-template-columns:1fr;margin-top:28px}
+@media(min-width:820px){.reg-grid{grid-template-columns:repeat(3,1fr)}}
+.rcard{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:24px 22px}
+.rcard h3{margin:0 0 8px;font-family:'Space Grotesk',sans-serif;font-size:16.5px;
+  font-weight:600;color:var(--text)}
+.rcard p{font-size:14.5px;line-height:1.62;color:var(--dim)}
+.rcard-warn{background:#FFF9EE;border-color:rgba(138,94,18,.22)}
+.reg-sub{margin:44px 0 0;font-family:'Space Grotesk',sans-serif;font-size:20px;
+  font-weight:600;color:var(--text)}
+
+/* framework timeline */
+.tl{margin-top:44px}
+.tl-lede{margin-top:10px;font-size:15.5px;color:var(--dim);max-width:70ch}
+.tl-table{width:100%;max-width:640px;margin-top:18px;border-collapse:collapse}
+.tl-table td{padding:11px 0;border-bottom:1px solid var(--border);font-size:14.5px;color:var(--dim)}
+.tl-table td:last-child{text-align:right;color:var(--text);font-weight:500;white-space:nowrap}
+.tl-foot{margin-top:18px;font-size:14.5px;color:var(--dim);max-width:74ch}
+
+
+/* Hero montage.
+   muted is REQUIRED, not a preference: browsers block autoplay outright unless
+   the video is muted, so an unmuted loop simply would not start. playsinline
+   stops iOS taking it fullscreen. The poster covers the gap before the first
+   frame decodes, so the panel is never empty. */
+/* The montage, at the page's own width.
+   It ran full-bleed for a while and read as a separate banner rather than part
+   of the page. Held to the 1240px container it lines up with the headline, the
+   pack grid and the footer, which is what makes it look built in rather than
+   dropped on top.
+
+   Height is a letterbox band rather than 16:9: a true 16:9 frame at this width
+   would be 700px tall and push everything below the fold. object-fit crops
+   rather than squashes. */
+.herovid{position:relative;margin:22px 0 30px;width:100%;
+  aspect-ratio:auto;height:clamp(320px, 40vw, 560px);
+  overflow:hidden;border-radius:20px 20px 0 0;border:0;background:var(--soft)}
+
+/* The foot of the picture dissolves into the page.
+   This was the one good thing about the full-bleed version: the clip stopped
+   looking like a box with a video in it and started looking like part of the
+   page. It works here too, and it does more than the shadow did - a shadow
+   draws the edge, this removes it. The gradient sits above the video and is
+   click-through, so it never intercepts anything. */
+.herovid::after{content:"";position:absolute;inset:auto 0 0;height:44%;z-index:1;
+  pointer-events:none;
+  background:linear-gradient(to top,
+    var(--bg) 0%,
+    rgba(247,249,252,.92) 18%,
+    rgba(247,249,252,.55) 48%,
+    rgba(247,249,252,0) 100%)}
+/* object-position sits high: at a wide crop the model frames people
+   centrally, so a centred crop takes the top of their heads off. */
+.herovid video{position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:50% 32%;display:block}
+
+@media (prefers-reduced-motion: reduce){
+  /* Honour the setting: show the poster frame and never start the loop. */
+  .herovid video{display:none}
+  .herovid{background-size:cover;background-position:50% 50%}
+}
+
+/* ECOS is named but not linked: the page does not exist yet, and a nav item
+   that 404s is worse than no nav item. Matches the homepage treatment. */
+.lnk.soon{color:var(--faint);cursor:default}
+.lnk.soon::after{content:"soon";margin-left:6px;font-size:9px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--blue);opacity:.6;
+  vertical-align:2px}
+
+.lede{margin-top:14px;font-size:16.5px;line-height:1.66;color:var(--dim);max-width:74ch}
+
+/* contact */
+.contact-block{background:var(--surface)}
+.cform{margin-top:28px;max-width:760px;display:grid;gap:18px}
+.crow{display:grid;gap:18px;grid-template-columns:1fr}
+@media(min-width:700px){.crow{grid-template-columns:1fr 1fr}}
+.cform label{display:block;font-size:13.5px;font-weight:600;color:var(--text)}
+.cform input,.cform textarea{display:block;width:100%;margin-top:7px;padding:11px 13px;
+  font:400 15px/1.5 Inter,system-ui,sans-serif;color:var(--text);background:var(--bg);
+  border:1px solid var(--border2);border-radius:10px}
+.cform input:focus,.cform textarea:focus{outline:2px solid var(--blue);outline-offset:1px;
+  border-color:transparent}
+.cform textarea{resize:vertical}
+.cactions{display:flex;flex-wrap:wrap;align-items:center;gap:16px}
+.cnote{font-size:13px;color:var(--faint);max-width:44ch;margin:0}
+.cfallback{margin-top:20px;font-size:14.5px;color:var(--dim)}
+.cfallback a{color:var(--blue-d);text-decoration:underline;text-underline-offset:2px}
+
+/* The montage, at the page's own width.
+   Same treatment as the CQC and ISO pages: held to the 1240px container so it
+   lines up with the headline and the sections below, with the foot of the
+   picture dissolving into the page rather than stopping at an edge.
+
+   Height is a letterbox band rather than 16:9, since a true 16:9 frame at this
+   width would be 700px tall and push everything below the fold. object-fit
+   crops rather than squashes, and the crop sits high because the model frames
+   people centrally: a centred crop takes the tops of their heads off. */
+.herovid{position:relative;margin:22px 0 30px;width:100%;
+  aspect-ratio:auto;height:clamp(320px, 40vw, 560px);
+  overflow:hidden;border-radius:20px 20px 0 0;border:0;background:var(--soft)}
+.herovid video{position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:50% 32%;display:block}
+.herovid::after{content:"";position:absolute;inset:auto 0 0;height:44%;z-index:1;
+  pointer-events:none;
+  background:linear-gradient(to top,
+    var(--bg) 0%,
+    rgba(247,249,252,.92) 18%,
+    rgba(247,249,252,.55) 48%,
+    rgba(247,249,252,0) 100%)}
+@media (prefers-reduced-motion: reduce){
+  /* Honour the setting: show the poster frame and never start the loop. */
+  .herovid video{display:none}
+  .herovid{background-size:cover;background-position:50% 32%}
+}
+
+/* the document pack */
+.dl-block{background:var(--surface)}
+.dl-grid{display:grid;gap:18px;grid-template-columns:1fr;margin-top:28px}
+@media(min-width:900px){.dl-grid{grid-template-columns:1fr 1fr .9fr}}
+.dlcard{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:24px 22px}
+.dlcard h3{margin:0 0 10px;font-family:'Space Grotesk',sans-serif;font-size:16.5px;
+  font-weight:600;color:var(--text)}
+.dl-list{margin:0;padding:0;list-style:none}
+.dl-list li{position:relative;padding-left:20px;margin-bottom:9px;font-size:14.5px;
+  line-height:1.6;color:var(--dim)}
+.dl-list li::before{content:"";position:absolute;left:2px;top:9px;width:6px;height:6px;
+  border-radius:50%;background:var(--blue);opacity:.55}
+.dlcard-go{background:var(--soft);border-color:rgba(23,107,255,.2);display:flex;
+  flex-direction:column}
+.dl-meta{font-size:12.5px;color:var(--faint);margin:0 0 16px}
+.dl-btn{align-self:flex-start}
+.dl-note{margin:16px 0 0;font-size:13px;line-height:1.6;color:var(--dim)}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="bar">
+      <a class="lockup" href="https://www.sentinelbusinesssolutions.net/" target="_top" aria-label="Sentinel Business Solutions">
+        <svg class="mk" viewBox="0 0 34 38" aria-hidden="true">
+          <path d="M17 1.6 32 7v13.4c0 8.3-6.2 14-15 16.9C8.2 34.4 2 28.7 2 20.4V7z" fill="#10233F"/>
+          <path d="m11.4 19.2 4.1 4.2 7.5-8.2" fill="none" stroke="#176BFF" stroke-width="2.6"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="tx">
+          <span class="nm">Sentinel</span>
+          <span class="sub">Business Solutions</span>
+        </span>
+      </a>
+      <nav>
+        <a class="lnk hide-sm" href="https://www.sentinelbusinesssolutions.net/cqc" target="_top">CQC</a>
+        <a class="lnk hide-sm" href="https://www.sentinelbusinesssolutions.net/iso" target="_top">ISO</a>
+        <a class="lnk hide-sm" href="https://www.sentinelbusinesssolutions.net/ecos" target="_top" aria-current="page">ECOS</a>
+        <a class="lnk hide-sm" href="https://www.sentinelbusinesssolutions.net/tools" target="_top">Tools</a>
+        <a class="lnk hide-sm" href="https://www.sentinelbusinesssolutions.net/about" target="_top">About</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<div class="wrap">
+
+  <figure class="herovid" style="background-image:url('https://static.wixstatic.com/media/f34b78_52ea54896dc14441b072dba40682180ef002.jpg')">
+        <video src="https://video.wixstatic.com/video/f34b78_52ea54896dc14441b072dba40682180e/720p/mp4/file.mp4" poster="https://static.wixstatic.com/media/f34b78_52ea54896dc14441b072dba40682180ef002.jpg"
+               autoplay muted loop playsinline preload="metadata"
+               aria-label="A charity shop volunteer, a homeless shelter, and an aid distribution point"></video>
+      </figure>
+
+  <p class="crumb"><a href="https://www.sentinelbusinesssolutions.net/" target="_top">Home</a> › ECOS</p>
+
+  <section class="phero">
+    <div>
+      <span class="eyebrow">Free standard · charity sector</span>
+      <h1>A free governance standard for charities</h1>
+      <p class="standfirst">The Excellence in Charitable Operations Standard was created by
+        Sentinel Business Solutions to assist charities in benchmarking what excellence looks like
+        within the sector. It comprises fourteen domains and 117 core requirements, with twenty-two
+        templates, trackers and a full implementation guide. It costs nothing, needs no account, and
+        asks for no email address.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#read">Read the Standard <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg></a>
+        <a class="btn btn-ghost" href="#why">Why it is free</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="facts">
+    <div class="fact"><span class="v">14</span><span class="l">Domains</span></div>
+    <div class="fact"><span class="v">117</span><span class="l">Core requirements</span></div>
+    <div class="fact"><span class="v">22</span><span class="l">Templates and trackers</span></div>
+    <div class="fact"><span class="v">£0</span><span class="l">Cost to you</span></div>
+  </section>
+
+  <!-- ══════════════ why it is free ══════════════
+       The honour-system explanation. Deliberately explicit that nothing is
+       verified and that no money reaches Sentinel: the moment this page
+       represents that proceeds go to a charity, the Charities Act 1992
+       commercial participator rules apply and a written agreement with each
+       named charity is required first. No charity is named anywhere. -->
+  <!-- ══════════════ why it is free ══════════════
+       The honour-system explanation, in John's own wording. Deliberately
+       explicit that nothing is verified and that no money reaches Sentinel:
+       the moment this page represents that proceeds go to a charity, the
+       Charities Act 1992 commercial participator rules apply and a written
+       agreement with each named charity is required first. No charity is
+       named anywhere on this page, and none has been approached. -->
+  <section class="sec reg-block" id="why">
+    <div class="sec-head">
+      <span class="eyebrow">The ask</span>
+      <h2>Why this is free</h2>
+      <p>The full Standard, all fourteen domains, the implementation guide and the twenty-two
+        document templates and trackers are all available for free. No account, no email address,
+        no payment, no trial that ends, no certification bodies that charge thousands for you to
+        receive a certificate.</p>
+    </div>
+
+    <p class="lede">We felt it would be wrong to charge charities for a wholly voluntary,
+      uncertifiable standard created around helping you to do more of what you already do best:
+      helping society and making a real, tangible difference in the world.</p>
+
+    <h3 class="reg-sub">What we ask instead</h3>
+    <p class="lede">If the Standard is useful to you, please pay it forward and give £25 to a
+      different charity that you care about.</p>
+    <p class="lede">Three things regarding this, so it is clear what is and is not happening.</p>
+
+    <div class="reg-grid">
+      <div class="rcard">
+        <h3>The money does not come to us</h3>
+        <p>We take nothing and we do not pass anything on. You choose the charity, you give
+          directly, and the whole transaction has nothing to do with Sentinel.</p>
+      </div>
+      <div class="rcard">
+        <h3>No checks</h3>
+        <p>There is no receipt to upload, no confirmation step, and no locked download waiting for
+          proof. We will never know whether you gave anything. A Standard whose central idea is
+          honest self-assessment would look ridiculous demanding evidence at the door.</p>
+      </div>
+      <div class="rcard">
+        <h3>It is not a condition</h3>
+        <p>If money is tight, or the £25 is needed somewhere more urgent, take the Standard and
+          use it. The organisations that most need a governance framework are usually the ones
+          least able to pay for one. That is the whole reason it is free.</p>
+      </div>
+    </div>
+
+    <h3 class="reg-sub">Why we are not doing this through a donation platform</h3>
+    <p class="lede">We looked at routing payment through a giving platform, so that every download
+      raised money for a named charity. It is a good idea and we may come back to it. Two things
+      stopped us for now.</p>
+
+    <div class="reg-grid">
+      <div class="rcard rcard-warn">
+        <h3>The law is specific about this</h3>
+        <p>Under the Charities Act 1992, a business that sells something while representing that
+          proceeds go to a charity is a commercial participator. That requires a written agreement
+          with each charity before a single sale, and a statement at the point of sale saying
+          exactly what proportion they receive. Those rules exist for good reasons and we are not
+          going to work around them by being vague about where money goes.</p>
+      </div>
+      <div class="rcard rcard-warn">
+        <h3>We have not asked anyone yet</h3>
+        <p>We have not asked any charity for their blessing. Naming charities on a sales page
+          before speaking to them would be exactly the sort of thing this Standard tells
+          organisations not to do.</p>
+      </div>
+      <div class="rcard rcard-warn">
+        <h3>If you are a charity reading this</h3>
+        <p>If a charity reading this would like to talk about doing it properly, we would welcome
+          that. Please contact us using the <a href="#contact">form at the bottom of the page</a> and put
+          <strong>Partnership</strong> in the heading.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ the reader ══════════════ -->
+  <section class="sec assess-block" id="read">
+    <div class="assess-grid">
+      <div>
+        <span class="eyebrow">The Standard</span>
+        <h2>Read it here, in full.</h2>
+        <p class="sub">Nothing is held back and nothing is behind a form. The reader below carries
+          the complete Standard: the conditions your staff, beneficiaries and trustees are actually
+          working in, the framework and its scoring model, all fourteen domains, and the
+          implementation sections that follow.</p>
+
+        <ul class="ticks">
+          <li>Fourteen domains and 117 core requirements, each with a real-world test</li>
+          <li>A six-point maturity scale, scored against evidence rather than intention</li>
+          <li>Twenty-two templates and trackers, one or more for every domain</li>
+          <li>An implementation guide ordered by consequence, not by domain number</li>
+        </ul>
+        <p class="tiny">Free · no account · no email address · read below</p>
+      </div>
+
+      <div>
+      <p class="app-label"><span class="dot"></span> ECOS Reader
+        <em>the complete Standard, Edition 3.0</em></p>
+      <div class="assess-card app-frame">
+        <iframe src="https://ecos-clear-read.base44.app"
+                title="ECOS Reader"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ══════════════ the document pack ══════════════
+       Sits after the reader, because somebody should see what the Standard
+       asks for before downloading the templates that answer it. The file is
+       named and sized in the button: a 1.6MB download behaves differently on
+       a phone from a 40MB one, and saying so avoids a surprise. -->
+  <section class="sec dl-block" id="download">
+    <div class="sec-head">
+      <span class="eyebrow">The document pack</span>
+      <h2>Twenty-two templates, trackers and the implementation guide</h2>
+      <p>Every domain has at least one working document behind it. They are ordinary Word and Excel
+        files with nothing locked, nothing watermarked and no macros, so they can be renamed,
+        rebranded and cut about to suit how your organisation already works.</p>
+    </div>
+
+    <div class="dl-grid">
+      <div class="dlcard">
+        <h3>What is in it</h3>
+        <ul class="dl-list">
+          <li>An implementation guide with an order of work, and what to do first</li>
+          <li>Policies and procedures for safeguarding, fundraising, data protection and environment</li>
+          <li>Registers and trackers for partners, incidents, pay gaps, carbon and eligibility</li>
+          <li>Calculators for full cost recovery, reserves and cash flow resilience</li>
+        </ul>
+      </div>
+      <div class="dlcard">
+        <h3>How to use it</h3>
+        <ul class="dl-list">
+          <li>Start with the implementation guide, not the domain you find most interesting</li>
+          <li>Complete the four documents in the first fortnight list before anything else</li>
+          <li>Replace every square-bracketed placeholder with your own detail</li>
+          <li>Delete the example rows once you have real entries of your own</li>
+        </ul>
+      </div>
+      <div class="dlcard dlcard-go">
+        <h3>Download</h3>
+        <p class="dl-meta">ECOS_Document_Pack.zip &middot; 1.6 MB &middot; 22 files &middot; Word and Excel</p>
+        <a class="btn btn-primary dl-btn" href="https://77e0e723-a39c-4293-abcf-0666acf26b42.usrfiles.com/archives/f34b78_ac7e6217cbe74d9e9339c85baaca59fe.zip" target="_top"
+           download="ECOS_Document_Pack.zip" rel="noopener">
+          Download the pack
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 13l6 6 6-6"/></svg>
+        </a>
+        <p class="dl-note">No account, no email address, no payment. If it helps, give &pound;25 to a
+          charity you care about.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ contact ══════════════
+       A Wix HTML embed has no backend, so this form cannot post anywhere. It
+       composes the message and hands it to the visitor's own email client via
+       mailto, which is the only way to send from inside an embed without
+       routing through a third party.
+       That fails for anyone using webmail with no desktop handler, so the
+       address is also shown in plain text and can be copied. A form that
+       silently does nothing is worse than no form. -->
+  <section class="sec contact-block" id="contact">
+    <div class="sec-head">
+      <span class="eyebrow">Get in touch</span>
+      <h2>Talk to us about ECOS</h2>
+      <p>If you are a charity interested in a partnership, put <strong>Partnership</strong> in the
+        subject. For anything else, tell us what you need and we will come back to you.</p>
+    </div>
+
+    <form class="cform" id="ecosContact" novalidate>
+      <div class="crow">
+        <label>Your name
+          <input type="text" name="name" autocomplete="name" required>
+        </label>
+        <label>Organisation
+          <input type="text" name="org" autocomplete="organization">
+        </label>
+      </div>
+      <div class="crow">
+        <label>Your email
+          <input type="email" name="from" autocomplete="email" required>
+        </label>
+        <label>Subject
+          <input type="text" name="subject" value="Partnership" required>
+        </label>
+      </div>
+      <label>Message
+        <textarea name="message" rows="6" required></textarea>
+      </label>
+
+      <div class="cactions">
+        <button type="submit" class="btn btn-primary">Open in your email app
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg></button>
+        <p class="cnote">This opens your own email programme with the message ready to send.
+          Nothing is sent from this page and nothing is stored here.</p>
+      </div>
+    </form>
+
+    <p class="cfallback">If that does not work, write to
+      <a href="mailto:jallen@sentinelbusinesssolutions.net?subject=Partnership" target="_top">jallen@sentinelbusinesssolutions.net</a>
+      directly.</p>
+  </section>
+
+</div>
+<footer>
+    <p>Sentinel Business Solutions · Building Better Businesses Through Compliance.</p>
+    <p class="rev">Document counts verified against the packs · reviewed 26 August 2026</p>
+  </footer><script>
+/* Height reporting.
+ *
+ * A Wix HTML embed is an iframe with a height fixed in the editor. That height
+ * has to be right at every breakpoint, and it never is: this page is far taller
+ * stacked on a phone than it is in three columns on a desktop, so a height that
+ * fits one leaves a gap or a scrollbar on the other. Setting it by hand, twice,
+ * for every page, is the painful way.
+ *
+ * So the page measures itself and tells the parent. Two routes, because which
+ * one works depends on how the embed was added:
+ *
+ *   Wix.setHeight  works when the component loads the Wix SDK.
+ *   postMessage    works everywhere, but needs six lines of Velo on the page
+ *                  to listen. See the snippet supplied with this file.
+ *
+ * Both fire on load, on resize, when webfonts finish (which changes wrapping),
+ * and whenever anything in the body changes size. The two timeouts catch late
+ * images. Sending the same height twice is harmless.
+ */
+(function(){
+  var last = 0;
+  function report(){
+    try{
+      var h = Math.ceil(document.documentElement.getBoundingClientRect().height) + 8;
+      if (Math.abs(h - last) < 2) return;   // ignore sub-pixel jitter
+      last = h;
+      if (window.Wix && Wix.setHeight) Wix.setHeight(h);
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ sentinelHeight: h }, '*');
+      }
+    }catch(e){}
+  }
+  window.addEventListener('load', report);
+  window.addEventListener('resize', report);
+  window.addEventListener('orientationchange', function(){ setTimeout(report, 300); });
+  if ('ResizeObserver' in window) new ResizeObserver(report).observe(document.body);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(report);
+  document.addEventListener('DOMContentLoaded', report);
+  setTimeout(report, 400); setTimeout(report, 1600); setTimeout(report, 4000);
+})();
+</script>
+
+
+<script>
+/* Compose the message and hand it to the visitor's email client.
+   No network call, nothing stored, nothing sent from this page. */
+(function () {
+  var form = document.getElementById('ecosContact');
+  if (!form) return;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = form.elements;
+    if (!f.name.value.trim() || !f.from.value.trim() || !f.message.value.trim()) {
+      form.reportValidity();
+      return;
+    }
+    var body =
+      'From: ' + f.name.value.trim() +
+      (f.org.value.trim() ? '\nOrganisation: ' + f.org.value.trim() : '') +
+      '\nReply to: ' + f.from.value.trim() +
+      '\n\n' + f.message.value.trim();
+    window.location.href =
+      'mailto:jallen@sentinelbusinesssolutions.net' +
+      '?subject=' + encodeURIComponent(f.subject.value.trim() || 'ECOS enquiry') +
+      '&body=' + encodeURIComponent(body);
+  });
+})();
+</script>
+<script>
+/* Escaping the embed.
+ *
+ * A Wix HTML embed is a sandboxed iframe. Links marked target="_top" are the
+ * normal way to break out of it and navigate the real page, but the browser
+ * only permits that if the iframe's sandbox grants top-level navigation. When
+ * it does not, the click is refused SILENTLY: no error, no console message,
+ * no URL change. Every nav link, footer link and card in this page uses
+ * target="_top", so they all fail together and it looks like the buttons are
+ * dead.
+ *
+ * This handler tries three routes in order and stops at the first that works,
+ * so it is correct whether or not the sandbox is the actual cause:
+ *
+ *   1. Set the top window's location directly. Works when permitted; throws a
+ *      SecurityError when not, which is caught.
+ *   2. Ask the parent page to navigate, for sites running the Velo snippet.
+ *      Costs nothing if nobody is listening.
+ *   3. Open in a new tab, which sandboxes allow far more readily than
+ *      top-navigation. Not ideal, but a new tab beats a dead button.
+ *
+ * Deliberately NOT intercepted:
+ *   - in-page anchors (#assess), which must scroll rather than navigate
+ *   - anything with a download attribute, which would lose the filename
+ *   - mailto and tel, which the browser handles better than we can
+ */
+(function () {
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+
+    var raw = a.getAttribute('href') || '';
+    if (!raw || raw.charAt(0) === '#') return;
+    if (a.hasAttribute('download')) return;
+    if (/^(mailto:|tel:)/i.test(raw)) return;
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) return;
+
+    var url = a.href;
+    e.preventDefault();
+
+    try {
+      if (window.top && window.top !== window) {
+        window.top.location.href = url;
+        return;
+      }
+      window.location.href = url;
+      return;
+    } catch (err) { /* sandbox refused it; fall through */ }
+
+    try {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ sentinelNavigate: url }, '*');
+      }
+    } catch (err) {}
+
+    window.open(url, '_blank', 'noopener');
+  }, true);
+})();
+</script>
+</body>
+</html>

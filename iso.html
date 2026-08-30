@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ISO document packs — Sentinel Business Solutions</title>
+<meta name="description" content="Document packs for 17 ISO management system standards, each with an implementation guide.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F9FC; --surface:#FFF; --soft:#EAF2FF; --graphite:#1A2029;
+  --border:rgba(16,35,63,.11); --border2:rgba(16,35,63,.22);
+  --text:#10233F; --dim:#46586F; --faint:#5F7085;
+  --blue:#176BFF; --blue-d:#0F52C9;
+  --amber:#C68A2B; --amber-t:#8A5E12;
+  --green:#2E8666; --green-t:#20624B;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--text);position:relative;overflow-x:hidden;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:16.5px;line-height:1.68;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;letter-spacing:-.015em;line-height:1.14;margin:0 0 .45em}
+h1{font-size:clamp(32px,4vw,44px);font-weight:700}
+h2{font-size:clamp(24px,2.6vw,32px);font-weight:600}
+h3{font-size:17px;font-weight:600;margin-bottom:.35em}
+p{margin:0 0 1em;color:var(--dim)}
+strong{color:var(--text);font-weight:600}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 26px;position:relative;z-index:1}
+
+.circuit{position:absolute;top:0;left:0;right:0;height:620px;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(to bottom,rgba(247,249,252,.30) 0,rgba(247,249,252,.88) 56%,#F7F9FC 92%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cg fill='none' stroke='%23176BFF' stroke-opacity='.10' stroke-width='1'%3E%3Cpath d='M0 64h96l22 22h142M0 190h58l24-24h178'/%3E%3C/g%3E%3Cg fill='%23176BFF' fill-opacity='.14'%3E%3Ccircle cx='96' cy='64' r='2.4'/%3E%3Ccircle cx='58' cy='190' r='2.4'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:100% 100%,260px 260px;background-repeat:no-repeat,repeat}
+
+header{padding:20px 0;position:relative;z-index:2;background:var(--surface);
+  border-bottom:1px solid var(--border)}
+.bar{display:flex;align-items:center;gap:26px}
+.lockup{display:flex;align-items:center;gap:12px;text-decoration:none;flex:none}
+.lockup .mk{width:34px;height:38px;flex:none;display:block}
+.lockup .tx{display:flex;flex-direction:column;line-height:1.1}
+.lockup .nm{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;
+  letter-spacing:-.01em;color:var(--text)}
+.lockup .sub{font-size:10px;font-weight:600;letter-spacing:.19em;text-transform:uppercase;
+  color:var(--faint)}
+nav{margin-left:auto;display:flex;align-items:center;gap:26px}
+nav a.lnk{font-size:14.5px;font-weight:500;color:var(--dim);text-decoration:none;
+  transition:color .18s var(--ease)}
+nav a.lnk:hover{color:var(--text)}
+nav a.lnk[aria-current="page"]{color:var(--text);font-weight:600}
+@media(max-width:960px){nav .hide-sm{display:none}}
+
+.btn{white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  min-height:44px;padding:0 22px;border-radius:999px;text-decoration:none;
+  font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;
+  border:1px solid transparent;cursor:pointer;
+  transition:transform .18s var(--ease),box-shadow .18s var(--ease),background .18s var(--ease)}
+.btn-primary{background:var(--blue);color:#fff}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(23,107,255,.28)}
+.btn-ghost{background:var(--surface);color:var(--text);border-color:var(--border2)}
+.btn-ghost:hover{transform:translateY(-1px);box-shadow:0 5px 14px rgba(16,35,63,.08)}
+.btn svg{transition:transform .18s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+
+.crumb{padding:22px 0 0;font-size:13.5px;color:var(--faint)}
+.crumb a{color:var(--faint);text-decoration:none}
+.crumb a:hover{color:var(--text)}
+
+/* hero */
+.phero{padding:8px 0 8px;display:grid;gap:36px;grid-template-columns:1fr;align-items:center}
+@media(min-width:960px){/* The montage no longer sits beside the copy at all - see .herovid. */}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;background:var(--soft);
+  color:var(--blue-d);border:1px solid rgba(23,107,255,.22);border-radius:999px;padding:6px 16px;
+  font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:20px}
+.phero h1{max-width:22ch}
+.standfirst{font-size:18.5px;color:var(--dim);max-width:56ch;margin-bottom:26px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+
+.portrait{position:relative;margin:0;aspect-ratio:4/5;overflow:hidden;border-radius:18px;
+  background:var(--soft);border:1px solid var(--border)}
+.portrait .still,.portrait .loop{position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:50% 16%;display:block}
+.portrait .loop{opacity:0;transition:opacity .32s var(--ease)}
+.portrait.playing .loop{opacity:1}
+
+/* facts */
+.facts{margin:44px 0 0;padding:24px 0;border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);display:grid;gap:24px;grid-template-columns:1fr 1fr}
+@media(min-width:900px){.facts{grid-template-columns:repeat(4,1fr)}}
+.fact .v{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:28px;
+  color:var(--text);display:block;line-height:1.1}
+.fact .l{font-size:13.5px;color:var(--faint);display:block;margin-top:4px}
+
+/* standard cards */
+.sec{margin:66px 0 0}
+.sec-head{max-width:62ch;margin-bottom:28px}
+.sec-head p:last-child{margin-bottom:0}
+.grid{display:grid;gap:16px;grid-template-columns:1fr}
+@media(min-width:780px){.grid{grid-template-columns:1fr 1fr}}
+.sc{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--border);
+  border-radius:14px;padding:20px 22px;text-decoration:none;color:inherit;
+  transition:transform .18s var(--ease),box-shadow .18s var(--ease),border-color .18s var(--ease)}
+.sc:hover{transform:translateY(-3px);border-color:var(--border2);
+  box-shadow:0 10px 26px rgba(16,35,63,.09)}
+.sc .ttl{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:19px;color:var(--text)}
+.sc .ed{color:var(--faint);display:block;margin:3px 0 10px}
+.sc .cat{font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--blue-d);display:block;margin-bottom:10px}
+.sc .use{font-size:15.5px;color:var(--dim);margin-bottom:18px}
+.sc .meta{margin-top:auto;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  padding-top:14px;border-top:1px solid var(--border)}
+.sc .docs{font-size:13.5px;color:var(--faint)}
+.sc .price{margin-left:auto;font-family:'Space Grotesk',sans-serif;font-weight:600;
+  font-size:16px;color:var(--blue-d)}
+
+/* pack panel */
+.pack{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:34px}
+@media(min-width:900px){.pack{padding:40px 42px;display:grid;gap:40px;
+  grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);align-items:start}}
+.pack h2{margin-bottom:.3em}
+.pack .buybox{background:var(--soft);border-radius:16px;padding:24px}
+.pack .buybox .amt{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:34px;
+  color:var(--text);display:block;line-height:1.1}
+.pack .buybox .sub{font-size:13.5px;color:var(--faint);display:block;margin:4px 0 18px}
+.pack .buybox .btn{width:100%}
+.pack ul{margin:0 0 18px;padding-left:20px;color:var(--dim)}
+.pack li{margin-bottom:.35em;font-size:15.5px}
+
+/* abi */
+.abi{margin:66px 0 0;background:var(--surface);border:1px solid var(--border);
+  border-radius:20px;padding:38px}
+@media(min-width:1000px){.abi{padding:44px 46px}}
+.abi-head{max-width:64ch;margin-bottom:32px}
+.abi-head p:last-child{margin-bottom:0}
+.abi-grid{display:grid;gap:24px;grid-template-columns:1fr}
+@media(min-width:820px){.abi-grid{grid-template-columns:repeat(3,1fr)}}
+.stepc{border-top:2px solid var(--soft);padding-top:20px}
+.stepc .ic{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;
+  border-radius:12px;background:var(--soft);margin-bottom:14px}
+.stepc .ic svg{width:19px;height:19px;stroke:var(--blue-d);fill:none;stroke-width:2.1;
+  stroke-linecap:round;stroke-linejoin:round}
+.stepc h3{font-size:19px}
+.stepc p{font-size:15px;margin:0}
+
+.candour{margin:52px 0 0;background:var(--surface);border:1px solid var(--border);
+  border-left:3px solid var(--amber);border-radius:14px;padding:24px 26px;max-width:74ch}
+.candour p:last-child{margin-bottom:0}
+
+.cta{margin:60px 0 0;background:var(--graphite);border-radius:20px;padding:46px 40px;
+  text-align:center;color:#fff}
+.cta h2{color:#fff;max-width:22ch;margin-inline:auto}
+.cta p{color:rgba(255,255,255,.74);max-width:54ch;margin:0 auto 24px}
+.cta .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.cta .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.28)}
+.cta .btn-ghost:hover{background:rgba(255,255,255,.07);box-shadow:none}
+
+footer{margin:40px 0 0;padding:24px 0 44px;border-top:1px solid var(--border);
+  display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+footer p{font-size:13.5px;color:var(--faint);margin:0}
+footer .rev{margin-left:auto}
+
+
+/* long-form CMS copy */
+.prose{max-width:70ch}
+.prose p{margin:0 0 1.05em}
+.prose p:last-child{margin-bottom:0}
+.prose h3{font-size:18px;margin:1.6em 0 .5em}
+.prose h3:first-child{margin-top:0}
+.prose ul{margin:0 0 1.05em;padding-left:20px;color:var(--dim)}
+.prose li{margin-bottom:.6em}
+.prose em{color:var(--text);font-style:italic}
+.prose a{color:var(--blue-d)}
+.prose dl{margin:0;display:grid;grid-template-columns:1fr;gap:0}
+@media(min-width:680px){.prose dl{grid-template-columns:minmax(150px,190px) 1fr}}
+.prose dt{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;
+  color:var(--faint);text-transform:uppercase;letter-spacing:.06em;
+  padding:12px 0 2px;border-top:1px solid var(--border)}
+.prose dd{margin:0;color:var(--dim);font-size:15.5px;padding:0 0 12px}
+@media(min-width:680px){.prose dd{padding:12px 0;border-top:1px solid var(--border)}
+  .prose dt{padding:12px 0}}
+.prose dl > dt:first-of-type,.prose dl > dt:first-of-type + dd{border-top:0}
+.prose table{width:100%;border-collapse:collapse;margin:1.2em 0 .4em;font-size:14.5px;
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.prose th,.prose td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--border);
+  color:var(--dim)}
+.prose th{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:12.5px;
+  text-transform:uppercase;letter-spacing:.07em;color:var(--faint)}
+.prose tr:last-child td{border-bottom:0}
+
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px 30px}
+.hook{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--amber);
+  border-radius:16px;padding:28px 30px;max-width:880px}
+.hook .prose{max-width:none}
+.hook .kick{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--amber-t);display:block;margin-bottom:10px}
+.hook h2{font-size:clamp(21px,2.2vw,26px);max-width:32ch}
+.two{display:grid;gap:26px;grid-template-columns:1fr}
+@media(min-width:940px){.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px}}
+.srcs{font-size:13.5px;color:var(--faint);margin-top:14px}
+.srcs a{color:var(--faint)}
+
+@media(max-width:520px){
+  nav{gap:0}
+  nav .btn{font-size:14px;padding:0 16px;min-height:42px}
+  .lockup .mk{width:30px;height:34px}.lockup .nm{font-size:18px}.lockup .sub{font-size:9px}
+  .abi,.pack{padding:28px 22px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .portrait .loop{display:none}
+}
+
+/* the guide section */
+.guide-block{background:var(--surface)}
+.guide-grid{display:grid;gap:18px;grid-template-columns:1fr;margin-top:34px}
+@media(min-width:760px){.guide-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1100px){.guide-grid{grid-template-columns:repeat(3,1fr)}}
+.gcard{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:24px 22px}
+.gcard .gnum{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;
+  letter-spacing:.1em;color:var(--blue)}
+.gcard h3{margin:10px 0 8px;font-family:'Space Grotesk',sans-serif;font-size:17px;
+  font-weight:600;color:var(--text)}
+.gcard p{font-size:14.5px;line-height:1.62;color:var(--dim)}
+
+/* the assessment block */
+.assess-block{background:var(--soft)}
+.assess-grid{display:grid;gap:34px;grid-template-columns:1fr}
+.assess-grid h2{margin-top:10px;max-width:28ch}
+.assess-grid .sub{margin-top:14px;font-size:16.5px;max-width:78ch}
+.ticks{margin:22px 0 0;padding:0;list-style:none}
+@media(min-width:900px){.ticks{columns:2;column-gap:40px}
+  .ticks li{break-inside:avoid}}
+.ticks li{position:relative;padding-left:30px;margin-bottom:10px;font-size:15px;color:var(--dim)}
+.ticks li::before{content:"";position:absolute;left:2px;top:8px;width:14px;height:8px;
+  border-left:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:rotate(-45deg)}
+.assess-grid .row{margin-top:26px}
+.tiny{margin-top:12px;font-size:13px;color:var(--faint)}
+.assess-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;
+  overflow:hidden;box-shadow:0 1px 2px rgba(15,35,65,.03),0 14px 40px rgba(15,35,65,.07)}
+
+/* The embedded portal.
+   Sized to the viewport rather than a fixed box, so the assessment gets as much
+   of the screen as there is. It cannot resize its parent - it is an iframe
+   inside the page embed - so the height is set here and the app scrolls within
+   it. Matches the CQC page exactly. */
+.app-frame{padding:0;overflow:hidden;background:var(--surface);border:0;box-shadow:none}
+.app-frame iframe{display:block;width:100%;border:0;
+  height:clamp(620px, calc(100vh - 120px), 1100px)}
+@media(max-width:1000px){.app-frame iframe{height:clamp(560px, calc(100vh - 80px), 900px)}}
+
+/* A label above the frame, so the panel reads as a tool rather than as more
+   page. */
+.app-label{display:flex;align-items:center;gap:9px;margin:0 0 12px;
+  font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:600;color:var(--text)}
+.app-label .dot{width:8px;height:8px;border-radius:50%;background:var(--blue);
+  box-shadow:0 0 0 4px rgba(23,107,255,.14)}
+.app-label em{margin-left:auto;font-style:normal;font-size:12px;font-weight:500;color:var(--faint)}
+.assess-head{display:flex;align-items:center;gap:10px;padding:16px 20px;
+  border-bottom:1px solid var(--border);font-family:'Space Grotesk',sans-serif;
+  font-weight:600;font-size:15px;color:var(--text)}
+.assess-head .dot{width:9px;height:9px;border-radius:50%;background:var(--blue)}
+.assess-body{padding:18px 20px 8px}
+.kq{display:grid;grid-template-columns:78px 1fr auto;align-items:center;gap:12px;margin-bottom:13px}
+.kq span{font-size:13.5px;color:var(--dim)}
+.kq i{display:block;height:7px;border-radius:4px;background:var(--blue);opacity:.9}
+.kq b{font-size:11.5px;font-weight:600;color:var(--faint);white-space:nowrap}
+.assess-foot{padding:12px 20px 16px;border-top:1px solid var(--border);font-size:12px;color:var(--faint)}
+
+/* Hero montage.
+   muted is REQUIRED, not a preference: browsers block autoplay outright unless
+   the video is muted, so an unmuted loop simply would not start. playsinline
+   stops iOS taking it fullscreen. The poster covers the gap before the first
+   frame decodes, so the panel is never empty. */
+/* The montage, at the page's own width.
+   It ran full-bleed for a while and read as a separate banner rather than part
+   of the page. Held to the 1240px container it lines up with the headline, the
+   pack grid and the footer, which is what makes it look built in rather than
+   dropped on top.
+
+   Height is a letterbox band rather than 16:9: a true 16:9 frame at this width
+   would be 700px tall and push everything below the fold. object-fit crops
+   rather than squashes. */
+.herovid{position:relative;margin:22px 0 30px;width:100%;
+  aspect-ratio:auto;height:clamp(320px, 40vw, 560px);
+  overflow:hidden;border-radius:20px 20px 0 0;border:0;background:var(--soft)}
+
+/* The foot of the picture dissolves into the page.
+   This was the one good thing about the full-bleed version: the clip stopped
+   looking like a box with a video in it and started looking like part of the
+   page. It works here too, and it does more than the shadow did - a shadow
+   draws the edge, this removes it. The gradient sits above the video and is
+   click-through, so it never intercepts anything. */
+.herovid::after{content:"";position:absolute;inset:auto 0 0;height:44%;z-index:1;
+  pointer-events:none;
+  background:linear-gradient(to top,
+    var(--bg) 0%,
+    rgba(247,249,252,.92) 18%,
+    rgba(247,249,252,.55) 48%,
+    rgba(247,249,252,0) 100%)}
+/* object-position sits high: at a wide crop the model frames people
+   centrally, so a centred crop takes the top of their heads off. */
+.herovid video{position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:50% 32%;display:block}
+
+@media (prefers-reduced-motion: reduce){
+  /* Honour the setting: show the poster frame and never start the loop. */
+  .herovid video{display:none}
+  .herovid{background-size:cover;background-position:50% 50%}
+}
+
+/* ECOS is named but not linked: the page does not exist yet, and a nav item
+   that 404s is worse than no nav item. Matches the homepage treatment. */
+.lnk.soon{color:var(--faint);cursor:default}
+.lnk.soon::after{content:"soon";margin-left:6px;font-size:9px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--blue);opacity:.6;
+  vertical-align:2px}
+
+/* transitions and certificates */
+.reg-block{background:var(--surface)}
+.reg-grid{display:grid;gap:18px;grid-template-columns:1fr;margin-top:28px}
+@media(min-width:820px){.reg-grid{grid-template-columns:repeat(3,1fr)}}
+.rcard{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:24px 22px}
+.rcard h3{margin:0 0 8px;font-family:'Space Grotesk',sans-serif;font-size:16.5px;
+  font-weight:600;color:var(--text)}
+.rcard p{font-size:14.5px;line-height:1.62;color:var(--dim)}
+.rcard-warn{background:#FFF9EE;border-color:rgba(138,94,18,.22)}
+.reg-sub{margin:44px 0 0;font-family:'Space Grotesk',sans-serif;font-size:20px;
+  font-weight:600;color:var(--text)}
+
+/* ── expanding standard cards ───────────────────────────────────────────────
+   The card is a button now, not a link: the detail lives on this page rather
+   than on a separate standard page.
+
+   Card and panel are ONE surface. When open, the card loses its bottom radius
+   and bottom border and the panel continues the same white card downward, so
+   it reads as one object growing rather than two stacked.
+
+   Height animates with grid-template-rows 0fr to 1fr. It is the only way to
+   transition to a height the browser computes itself; max-height guesses a
+   number, and a wrong guess either clips the content or ruins the easing. The
+   inner wrapper needs overflow:hidden and min-height:0 for the track to
+   actually collapse.
+
+   The column stays card-width on purpose. About 75 characters is a comfortable
+   measure; a full-width panel would be harder to read, not easier. */
+
+.grid{align-items:start}
+.sc-wrap{display:block}
+
+.sc{cursor:pointer;text-align:left;width:100%;font:inherit;color:inherit;
+  background:var(--surface);position:relative;
+  transition:border-color .3s ease, box-shadow .3s ease, border-radius .3s ease}
+.sc .chev{position:absolute;top:22px;right:20px;width:17px;height:17px;
+  color:var(--faint);transition:transform .38s cubic-bezier(.4,0,.2,1),color .3s ease}
+.sc:hover .chev{color:var(--blue-d)}
+.sc[aria-expanded="true"] .chev{transform:rotate(180deg);color:var(--blue-d)}
+
+/* open: square off the bottom and drop the border so the panel continues it */
+.sc[aria-expanded="true"]{border-color:rgba(23,107,255,.28);
+  border-bottom-color:transparent;border-bottom-left-radius:0;
+  border-bottom-right-radius:0;box-shadow:none}
+
+.sc-detail{display:grid;grid-template-rows:0fr;
+  transition:grid-template-rows .42s cubic-bezier(.4,0,.2,1)}
+.sc[aria-expanded="true"] + .sc-detail{grid-template-rows:1fr}
+.sc-detail > div{overflow:hidden;min-height:0}
+
+.sc-detail .body{background:var(--surface);
+  border:1px solid rgba(23,107,255,.28);border-top:0;
+  border-radius:0 0 16px 16px;padding:4px 24px 28px;
+  box-shadow:0 18px 44px rgba(15,35,63,.10)}
+/* a hairline where the card ends, instead of a border across the full width */
+.sc-detail .body::before{content:"";display:block;height:1px;
+  background:var(--border);margin:0 0 22px}
+
+.sc-detail h3{font-family:'Space Grotesk',sans-serif;font-size:14.5px;font-weight:600;
+  color:var(--text);margin:26px 0 9px}
+.sc-detail h3:first-of-type{margin-top:0}
+.sc-detail p{font-size:14.5px;line-height:1.68;color:var(--dim);margin:0 0 12px}
+.sc-detail ul{margin:0 0 14px;padding-left:18px}
+.sc-detail li{font-size:14.5px;line-height:1.64;color:var(--dim);margin-bottom:9px}
+.sc-detail li::marker{color:var(--blue);font-size:12px}
+
+.sc-detail dl{display:grid;grid-template-columns:1fr;gap:0;margin:0 0 16px;
+  border-top:1px solid var(--border)}
+.sc-detail dt{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.09em;color:var(--faint);
+  padding:11px 0 0}
+.sc-detail dd{margin:0;padding:2px 0 11px;font-size:14px;line-height:1.6;
+  color:var(--dim);border-bottom:1px solid var(--border)}
+
+.sc-detail .eyebrow-sm{font-family:'Space Grotesk',sans-serif;font-size:10.5px;
+  font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-d);
+  display:block;margin-bottom:12px}
+.sc-detail .buy{display:inline-flex;align-items:center;gap:8px;margin-top:20px}
+
+@media (prefers-reduced-motion: reduce){
+  .sc-detail,.sc,.sc .chev{transition:none}
+}
+
+/* A pack that is listed but not yet on sale. Muted rather than alarming: the
+   pack exists and is finished, it is waiting on a publication date. */
+.sc .price.pending{color:var(--faint);font-size:13.5px;font-weight:600;
+  letter-spacing:0;white-space:nowrap}
+
+/* ── the two actions ────────────────────────────────────────────────────────
+   Each card offers a choice rather than one destination: read more, which
+   expands in place, or buy, which goes straight to the product. A link cannot
+   sit inside a button, so the card is a plain div holding a button for the
+   first action and an anchor for the second. */
+
+.sc-card{background:var(--surface);border:1px solid var(--border);
+  border-radius:16px;overflow:hidden;
+  transition:border-color .3s ease, box-shadow .3s ease, border-radius .3s ease}
+.sc-card:hover{box-shadow:0 2px 4px rgba(15,35,63,.05),0 12px 30px rgba(15,35,63,.09)}
+
+.sc-open{display:block;width:100%;text-align:left;background:none;border:0;
+  font:inherit;color:inherit;cursor:pointer;padding:22px 24px 4px}
+.sc-open .ttl{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:19px;
+  color:var(--text);display:block}
+.sc-open .ed{color:var(--faint);display:block;font-size:12.5px;margin-top:3px}
+.sc-open .cat{display:block;font-family:'Space Grotesk',sans-serif;font-size:11px;
+  font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-d);
+  margin:11px 0 9px}
+.sc-open .use{display:block;font-size:14.5px;line-height:1.6;color:var(--dim)}
+
+.sc-more{display:inline-flex;align-items:center;gap:5px;margin-top:14px;
+  font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:600;
+  color:var(--blue-d)}
+.sc-more .chev{width:15px;height:15px;
+  transition:transform .38s cubic-bezier(.4,0,.2,1)}
+.sc-open[aria-expanded="true"] .sc-more .chev{transform:rotate(180deg)}
+.sc-open:hover .sc-more{color:var(--blue)}
+
+.sc-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:14px 24px 18px;margin-top:14px;border-top:1px solid var(--border)}
+.sc-foot .docs{font-size:13.5px;color:var(--faint)}
+.sc-buy{display:inline-flex;align-items:center;white-space:nowrap;
+  padding:9px 16px;border-radius:10px;background:var(--blue);color:#fff;
+  font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;
+  text-decoration:none;transition:background .2s ease, transform .2s ease}
+.sc-buy:hover{background:var(--blue-d);transform:translateY(-1px)}
+
+/* open: the card squares off at the bottom so the panel continues it */
+.sc-card:has(.sc-open[aria-expanded="true"]){border-color:rgba(23,107,255,.28);
+  border-bottom-left-radius:0;border-bottom-right-radius:0;border-bottom-color:transparent}
+.sc-open[aria-expanded="true"] + .sc-foot{border-bottom:0}
+
+.sc-detail{display:grid;grid-template-rows:0fr;
+  transition:grid-template-rows .42s cubic-bezier(.4,0,.2,1)}
+.sc-wrap:has(.sc-open[aria-expanded="true"]) .sc-detail{grid-template-rows:1fr}
+.sc-detail > div{overflow:hidden;min-height:0}
+
+/* Section headings I add, versus the h3s the CMS content brings with it.
+   The CMS uses h3 for each pitfall, so mine take a class to sit above them. */
+.sc-detail h3.sec{font-family:'Space Grotesk',sans-serif;font-size:10.5px;
+  font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-d);
+  margin:30px 0 12px}
+.sc-detail h3:not(.sec){font-family:'Space Grotesk',sans-serif;font-size:14.5px;
+  font-weight:600;color:var(--text);margin:22px 0 8px}
+</style>
+</head>
+<body>
+<div class="circuit" aria-hidden="true"></div>
+<header>
+  <div class="wrap">
+    <div class="bar">
+      <a class="lockup" href="https://www.sentinelbusinesssolutions.net/" target="_top" aria-label="Sentinel Business Solutions">
+        <svg class="mk" viewBox="0 0 34 38" aria-hidden="true">
+          <path d="M17 1.6 32 7v13.4c0 8.3-6.2 14-15 16.9C8.2 34.4 2 28.7 2 20.4V7z" fill="#10233F"/>
+          <path d="m11.4 19.2 4.1 4.2 7.5-8.2" fill="none" stroke="#176BFF" stroke-width="2.6"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="tx">
+          <span class="nm">Sentinel</span>
+          <span class="sub">Business Solutions</span>
+        </span>
+      </a>
+      <nav>
+        <a class="lnk hide-sm" href="https://www.sentinelbusinesssolutions.net/cqc" target="_top">CQC</a>
+        <a class="lnk hide-sm" href="https://www.sentinelbusinesssolutions.net/iso" target="_top" aria-current="page">ISO</a>
+        <span class="lnk hide-sm soon">ECOS</span>
+        <a class="lnk hide-sm" href="https://www.sentinelbusinesssolutions.net/tools" target="_top">Tools</a>
+        <a class="lnk hide-sm" href="https://www.sentinelbusinesssolutions.net/about" target="_top">About</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- The montage sits directly under the header, ahead of everything else.
+     It is inside .wrap only so the negative margins have a container to
+     break out of; visually it spans the full viewport. -->
+<div class="wrap">
+
+  <figure class="herovid" style="background-image:url('https://static.wixstatic.com/media/f34b78_46249feb261f4775b9754604670949e3f002.jpg')">
+        <video src="https://video.wixstatic.com/video/f34b78_46249feb261f4775b9754604670949e3/720p/mp4/file.mp4" poster="https://static.wixstatic.com/media/f34b78_46249feb261f4775b9754604670949e3f002.jpg"
+               autoplay muted loop playsinline preload="metadata"
+               aria-label="Road traffic safety, food manufacturing and warehouse logistics"></video>
+      </figure>
+
+  <p class="crumb"><a href="https://www.sentinelbusinesssolutions.net/" target="_top">Home</a> › ISO</p>
+
+  <section class="phero">
+    <div>
+      <span class="eyebrow">ISO management systems</span>
+      <h1>Every document your management system needs, written to the clause.</h1>
+      <p class="standfirst">Packs for 16 standards, each mapped clause by clause and supplied
+        as editable Word files. Every document pack comes with an implementation guide that tells you how to apply,
+        integrate and utilise it as a part of your management system in the order an auditor
+        will look for it.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#assess">Take the free assessment</a>
+        <a class="btn btn-ghost" href="#packs">Choose your standard <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="facts">
+    <div class="fact"><span class="v">16</span><span class="l">Standards covered</span></div>
+    <div class="fact"><span class="v">665</span><span class="l">Total templates</span></div>
+    <div class="fact"><span class="v">Word &amp; Excel</span><span class="l">Editable, never locked</span></div>
+    <div class="fact"><span class="v">Included</span><span class="l">Full implementation guide in every pack</span></div>
+  </section>
+
+    <!-- ══════════════ the assessment, before the packs ══════════════
+       The pathway is Assess, Build, Improve, so the free step comes before the
+       shelf. Written from what the portal actually produces: a weighted clause
+       scorecard, four headline tiles, and a readiness band - not CQC-style
+       ratings, because ISO has no equivalent and inventing one would be a
+       claim nobody is entitled to make. -->
+  <section class="sec assess-block" id="assess">
+    <div class="assess-grid">
+      <div>
+        <span class="eyebrow">Step one · Assess</span>
+        <h2>Find out where you stand before you buy anything.</h2>
+        <p class="sub">The readiness assessment scores you clause by clause against the standard you
+          pick. It takes about twenty minutes, needs no account and costs nothing. You are not asked
+          for a card and you are not asked for an email.</p>
+
+        <ul class="ticks">
+          <li>A score for every clause, each weighted by how much of the standard sits there rather
+            than by how many questions we happened to write</li>
+          <li>Critical gaps separated from the rest, so you know what blocks certification and what
+            merely needs work</li>
+          <li>The number of clauses below 60%, which is usually the honest picture</li>
+          <li>The specific documents each gap calls for, named individually</li>
+          <li>Several standards at once if you run an integrated management system, scored together
+            rather than one at a time</li>
+        </ul>
+
+        <p class="tiny">No signup · Instant results · PDF report · start below</p>
+      </div>
+
+      <div>
+      <p class="app-label"><span class="dot"></span> Readiness assessment
+        <em>free · no account · about twenty minutes</em></p>
+      <div class="assess-card app-frame">
+        <iframe src="https://assess.sentinelbusinesssolutions.net"
+                title="Sentinel ISO readiness assessment"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ transitions and certificates ══════════════
+       Taken from the ISO 9001 and ISO 14001 records in the Standards
+       collection. All of it is cross-cutting rather than specific to one
+       standard, which is why it belongs on the index page rather than on a
+       standard page. The dates are the CMS figures, which were checked and
+       found correct when the CQC framework dates were disputed. -->
+  <section class="sec reg-block">
+    <div class="sec-head">
+      <span class="eyebrow">Before you buy anything from anyone</span>
+      <h2>Two editions, two clocks</h2>
+      <p>For the first time the two most widely held ISO standards have separated. If you run an
+        integrated management system you are now facing two transitions on two different timetables,
+        and planning them as one programme costs far less than paying for each in turn.</p>
+    </div>
+
+    <div class="reg-grid">
+      <div class="rcard">
+        <h3>ISO 14001 has already moved</h3>
+        <p>The 2026 edition published in April 2026 and the 2015 edition was withdrawn on
+          <strong>15 April 2026</strong>. Certification bodies stop issuing new certificates to the
+          2015 edition on <strong>31 October 2027</strong>, and every organisation must have
+          transitioned by <strong>30 April 2029</strong>.</p>
+      </div>
+      <div class="rcard">
+        <h3>ISO 9001 has not</h3>
+        <p>The sixth edition is still under publication, with ISO indicating September 2026. Its
+          transition has not formally started. The changes are evolutionary rather than structural,
+          so there is no reason to delay certifying to the 2015 edition now.</p>
+      </div>
+      <div class="rcard">
+        <h3>Everything else is unchanged</h3>
+        <p>Clauses 4 to 10 are shared across 9001, 14001, 45001 and 22301, so a second standard is
+          far less work than the first. Each pack states the edition its documents are written
+          against.</p>
+      </div>
+    </div>
+
+    <h3 class="reg-sub">Where organisations get caught out</h3>
+    <div class="reg-grid">
+      <div class="rcard rcard-warn">
+        <h3>Assuming you have until 2029 to start</h3>
+        <p>You have until April 2029 to <em>finish</em>. Certification bodies stop issuing to the
+          2015 edition in October 2027, and audit slots in the months before any deadline are
+          scarce. Treat 2027 as the real date.</p>
+      </div>
+      <div class="rcard rcard-warn">
+        <h3>A certificate that is not UKAS-accredited</h3>
+        <p>Cheap, quick, and rejected by exactly the supply chain audits you bought it for. Verify
+          any supplier's certificate on UKAS CertCheck, and expect your own customers to do the same
+          to you.</p>
+      </div>
+      <div class="rcard rcard-warn">
+        <h3>Treating the climate amendment as paperwork</h3>
+        <p>Amendment 1:2024 requires you to decide whether climate change is a relevant issue in your
+          context, and to show that you decided. It does not require emissions data. But
+          "not relevant" with no reasoning behind it is a finding.</p>
+      </div>
+    </div>
+  </section>
+
+    <section class="sec" id="packs">
+    <div class="sec-head">
+      <span class="eyebrow">Step two · Build</span>
+      <h2>Choose the document pack for your standard</h2>
+      <p>Each pack covers one management system in full. Prices are per pack, and the edition shown
+        is the one the documents are written against.</p>
+    </div>
+    <div class="grid">
+      <a class="sc" href="https://www.sentinelbusinesssolutions.net/standards/iso-9001/iso-9001" target="_top">
+        <span class="ttl">ISO 9001</span>
+        <span class="ed mono">ISO 9001:2015</span>
+        <span class="cat">Quality management</span>
+        <span class="use">The world&#x27;s most widely held certification: what it requires, and what the sixth edition arriving this September actually changes.</span>
+        <span class="meta">
+          <span class="docs">50 documents</span>
+          <!-- Not on sale until the sixth edition publishes on 16 September 2026.
+               The store product is out of stock and carries a matching ribbon, so
+               the card and the shop say the same thing. -->
+          <span class="price pending">Available 16 September</span>
+        </span>
+      </a>
+      <div class="sc-wrap">
+      <div class="sc-card">
+        <button class="sc-open" type="button" aria-expanded="false">
+          <span class="ttl">ISO 14001</span>
+          <span class="ed mono">ISO 14001:2026</span>
+          <span class="cat">Environmental management</span>
+          <span class="use">The 2015 edition is withdrawn. What the new edition asks for, and the two dates that decide when you have to act.</span>
+          <span class="sc-more">Read more <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span>
+        </button>
+        <div class="sc-foot">
+          <span class="docs">44 documents</span>
+          <a class="sc-buy" href="https://www.sentinelbusinesssolutions.net/product-page/iso-14001-document-pack" target="_top">Buy &middot; £129.99</a>
+        </div>
+      </div>
+      <div class="sc-detail"><div><div class="body">
+
+        <span class="eyebrow-sm">What it is</span>
+<p>ISO 14001 specifies requirements for an environmental management system. It asks you to work out which of your activities interact with the environment, which of those interactions matter, what obligations apply, and what you are doing about all three, then to show that the system improves rather than merely persists.</p><p>The 2026 edition is an evolution rather than a rebuild. The management system skeleton is unchanged; what has moved is the breadth of what counts as environmental context, and the emphasis on demonstrable performance rather than maintained process.</p>
+
+        <h3 class="sec">Key facts</h3>
+<dl><dt>Current edition</dt><dd>ISO 14001:2026 — Environmental management systems — Requirements with guidance for use</dd><dt>Published</dt><dd>April 2026, replacing ISO 14001:2015</dd><dt>Status of 2015</dt><dd>Withdrawn on 15 April 2026</dd><dt>Transition</dt><dd>New certificates to the 2015 edition stop 31 October 2027; all organisations must transition by 30 April 2029</dd><dt>Certifiable</dt><dd>Yes, by a UKAS-accredited certification body</dd></dl>
+
+        <h3 class="sec">Who needs it</h3>
+<p>It is rarely a standalone decision. Most organisations arrive at it through one of three routes:</p><ul><li><strong>Manufacturers and processors with permits or consents.</strong> Regulatory exposure is real and a systematic approach is cheaper than reacting to enforcement.</li><li><strong>Suppliers to large corporates and the public sector.</strong> Scope 3 reporting has pushed environmental questions down the supply chain, and buyers increasingly want a certificate rather than a questionnaire.</li><li><strong>Organisations that already hold ISO 9001.</strong> The shared structure makes 14001 the cheapest second certification to add, and joint audits cost less than two separate ones.</li></ul>
+
+        <h3 class="sec">Where organisations get caught out</h3>
+<h3>Assuming you have until 2029 to start</h3><p>You have until 30 April 2029 to finish. Certification bodies stop issuing to the 2015 edition on 31 October 2027, and audit slots in the months before a deadline are always scarce. Treat 2027 as the real date.</p><h3>An aspects register that lists activities rather than aspects</h3><p>"Vehicle fleet" is an activity. The aspect is fuel consumption, and the impact is resource depletion and emissions. Registers built at the wrong level of granularity produce significance scores nobody can defend.</p><h3>No evidence for the new clause 6.3</h3><p>A change register driven by aspects is not the same as planning changes to the management system itself. If nothing in your documentation shows the four considerations 6.3 requires, expect a finding.</p>
+
+      </div></div></div>
+      </div>
+      <div class="sc-wrap">
+      <div class="sc-card">
+        <button class="sc-open" type="button" aria-expanded="false">
+          <span class="ttl">ISO 27001</span>
+        <span class="ed mono">ISO/IEC 27001:2022</span>
+        <span class="cat">Information security</span>
+        <span class="use">The certification enterprise buyers ask for by name: what it requires, what changed in the 2022 edition, and what to do if your certificate lapsed at the transition deadline.</span>
+          <span class="sc-more">Read more <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span>
+        </button>
+        <div class="sc-foot">
+          <span class="docs">43 documents</span>
+          <a class="sc-buy" href="https://www.sentinelbusinesssolutions.net/product-page/isoiec-27001-document-pack" target="_top">Buy &middot; £149.99</a>
+        </div>
+      </div>
+      <div class="sc-detail"><div><div class="body">
+
+        <span class="eyebrow-sm">What it is</span>
+        <p>ISO/IEC 27001 specifies requirements for an <strong>Information Security Management System</strong>, an ISMS. It is not a technical checklist of security products. It is a governance framework: how you decide what information matters, what could go wrong, which controls you will apply, and how you prove any of it is working.</p>
+        <p>That framing catches people out. Organisations often arrive expecting a list of things to install and find instead a requirement to make and evidence decisions. The controls matter, but the auditable substance is the decision-making around them.</p>
+
+        <h3>Key facts</h3>
+        <dl>
+          <dt>Full title</dt><dd>ISO/IEC 27001:2022 — Information security, cybersecurity and privacy protection — Information security management systems — Requirements</dd>
+          <dt>Published</dt><dd>25 October 2022 (third edition), plus Amendment 1:2024 on climate action</dd>
+          <dt>Certifiable</dt><dd>Yes. It is the most widely recognised security certification in procurement</dd>
+          <dt>Applies to</dt><dd>Any organisation holding information worth protecting, at any size, in any sector</dd>
+          <dt>Transition</dt><dd>The deadline to move from the 2013 edition passed on 31 October 2025</dd>
+        </dl>
+
+        <h3>Who needs it</h3>
+        <p>In practice, most organisations pursue 27001 because someone made them:</p>
+        <ul>
+          <li><strong>Enterprise and public-sector procurement.</strong> The most common trigger by a distance. Certification moves from nice-to-have to deal-blocker the moment you sell upmarket.</li>
+          <li><strong>Handling other organisations' data.</strong> If you are a processor, your clients' own compliance obligations flow down to you through contract.</li>
+          <li><strong>Regulated or high-trust sectors</strong> such as finance, health, legal and critical infrastructure, where demonstrable security governance is expected rather than requested.</li>
+        </ul>
+
+        <h3>If your certificate still says 2013, it is no longer valid</h3>
+        <p>The transition period to the 2022 edition ended on <strong>31 October 2025</strong>. Certificates against ISO/IEC 27001:2013 were withdrawn at that point. They did not quietly run to their expiry date.</p>
+        <p>If you missed it, there is no transition route left. You return through a full initial certification: Stage 1 and Stage 2 audits as though you had never been certified. The practical consequence is a gap in your certification history, which procurement teams do notice. Worth checking the date on your certificate before a client does.</p>
+
+        <a class="btn btn-primary buy" href="https://www.sentinelbusinesssolutions.net/product-page/isoiec-27001-document-pack" target="_top">
+          Buy the ISO 27001 pack &middot; £149.99
+        </a>
+
+      </div></div></div>
+      </div>
+      <div class="sc-wrap">
+      <div class="sc-card">
+        <button class="sc-open" type="button" aria-expanded="false">
+          <span class="ttl">ISO 45001</span>
+          <span class="ed mono">ISO 45001:2018</span>
+          <span class="cat">Occupational health and safety</span>
+          <span class="use">The only OH&amp;S management system standard that makes worker participation a requirement, and the one about to make mental health auditable.</span>
+          <span class="sc-more">Read more <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span>
+        </button>
+        <div class="sc-foot">
+          <span class="docs">46 documents</span>
+          <a class="sc-buy" href="https://www.sentinelbusinesssolutions.net/product-page/iso-45001-document-pack" target="_top">Buy &middot; £149.99</a>
+        </div>
+      </div>
+      <div class="sc-detail"><div><div class="body">
+
+        <span class="eyebrow-sm">What it is</span>
+<p>ISO 45001 sets out what an occupational health and safety management system has to do. It replaced OHSAS 18001, which was withdrawn in March 2021, and it is the only OH&S standard that carries genuine international accredited recognition.</p><p>Its defining feature is clause 5.4, consultation and participation of workers. Not a safety committee of managers; the standard specifically requires the participation of <em>non-managerial</em> workers and the removal of the barriers that stop them taking part: time, language, literacy, and fear of reprisal. Auditors ask to interview shop-floor staff directly, and that single clause is where most weak systems come apart.</p><p>It is not a legal requirement in Great Britain. Your duties sit in the Health and Safety at Work etc. Act 1974 and the Management of Health and Safety at Work Regulations 1999. ISO 45001 is how you evidence that you have discharged them.</p>
+
+        <h3 class="sec">Key facts</h3>
+<dl><dt>Current edition</dt><dd>ISO 45001:2018 — Occupational health and safety management systems (1st edition, 12 March 2018, 41 pages)</dd><dt>Next edition</dt><dd>ISO/DIS 45001. The DIS ballot ran 16 June to 8 September 2026 and publication is targeted for 2027</dd><dt>Amendment</dt><dd>Amendment 1:2024 on climate action applies: one sentence at 4.1, one note at 4.2</dd><dt>Certifiable</dt><dd>Yes, UKAS-accredited, and inside the IAF Multilateral Recognition Arrangement since 5 March 2020</dd><dt>Structure</dt><dd>Harmonized Structure, clauses 4 to 10, shared with 9001, 14001 and 22301</dd></dl>
+
+        <h3 class="sec">Who needs it</h3>
+<p>The driver is almost always a customer or an insurer rather than a regulator:</p><ul><li><strong>Construction and civils subcontractors bidding to Tier 1 main contractors.</strong> Under the Common Assessment Standard Question Set version 5, live since 1 July 2025, Question 71 exempts you from the entire health-and-safety question block if you hold either a valid SSIP certificate <em>or</em> ISO 45001 from a UKAS-accredited body. That is a hard tender gate, not a nice-to-have.</li><li><strong>Facilities management, highways and social housing contractors.</strong> Constructionline Gold and Platinum and CHAS Elite sit on top of the Common Assessment Standard and are routinely written into framework prequalification.</li><li><strong>High-hazard manufacturing, waste, logistics and utilities.</strong> Employers' liability premium negotiation and customer supply-chain audits, plus demonstrable "adequate arrangements" if the HSE ever investigates you.</li></ul>
+
+        <h3 class="sec">Where organisations get caught out</h3>
+<h3>A safety committee of managers presented as worker consultation</h3><p>This breaches clause 5.4 b) to d) directly. The standard requires emphasis on the participation of non-managerial workers and the removal of the barriers that prevent it. An auditor will ask to speak to operatives without a manager present, and what they say is the evidence.</p><h3>Contractors managed with a signing-in book and an insurance certificate</h3><p>Clause 8.1.4.2 requires you to coordinate your OH&S management system with your contractors' and to apply OH&S criteria to their selection. Where activity is outsourced, 8.1.4.3 applies as well. This is where the majority of major nonconformities land.</p><h3>Risk registers that jump straight to PPE and training</h3><p>Clause 8.1.2 requires the hierarchy of controls to be applied in order: elimination, substitution, engineering controls, administrative controls, then PPE. Auditors expect to see that elimination and substitution were demonstrably considered and why they were rejected, not simply that hard hats were issued.</p>
+
+      </div></div></div>
+      </div>
+      <div class="sc-wrap">
+      <div class="sc-card">
+        <button class="sc-open" type="button" aria-expanded="false">
+          <span class="ttl">ISO 22301</span>
+          <span class="ed mono">ISO 22301:2019</span>
+          <span class="cat">Business continuity</span>
+          <span class="use">Twenty-one pages that turn a business continuity plan into a system which survives contact with reality. It is also the standard most often mistaken for regulatory compliance.</span>
+          <span class="sc-more">Read more <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span>
+        </button>
+        <div class="sc-foot">
+          <span class="docs">42 documents</span>
+          <a class="sc-buy" href="https://www.sentinelbusinesssolutions.net/product-page/iso-22301-document-pack" target="_top">Buy &middot; £149.99</a>
+        </div>
+      </div>
+      <div class="sc-detail"><div><div class="body">
+
+        <span class="eyebrow-sm">What it is</span>
+<p>ISO 22301 specifies requirements for a business continuity management system: how you work out what would hurt, how quickly it would hurt, what you will do about it, and how you prove the plan works before you need it.</p><p>It is the shortest of the major management system standards at twenty-one pages, and the most operationally demanding, because clause 8 asks for artefacts most organisations do not have: a business impact analysis derived from impact over time rather than from IT's recovery estimates, costed resource requirements, a response structure with defined authority to invoke, and an exercise programme that actually runs.</p><p>Almost everyone who fails in a real incident had a plan. What they lacked was tested resource provisioning and someone with the authority to declare.</p>
+
+        <h3 class="sec">Key facts</h3>
+<dl><dt>Current edition</dt><dd>ISO 22301:2019 — Security and resilience — Business continuity management systems (2nd edition, 30 October 2019, 21 pages)</dd><dt>Next edition</dt><dd>ISO/CD 22301, third edition. The committee draft comment period closed 10 May 2026 and no DIS ballot has opened.</dd><dt>Amendment</dt><dd>Amendment 1:2024 on climate action applies</dd><dt>Certifiable</dt><dd>Yes, and UKAS accredits it, though business continuity is <strong>not</strong> a sub-scope of the IAF Multilateral Recognition Arrangement</dd><dt>Structure</dt><dd>Harmonized Structure, clauses 4 to 10, with almost everything distinctive inside clause 8</dd></dl>
+
+        <h3 class="sec">Who needs it</h3>
+<p>Three groups, and for the first the driver is a regulator that ISO 22301 does not satisfy:</p><ul><li><strong>FCA- and PRA-regulated firms, payment and e-money institutions, and qualifying cryptoasset firms.</strong> The PS21/3 operational resilience regime. The transition ended on 31 March 2025; PS7/26, published 18 March 2026, adds operational incident reporting within 24 hours and material third-party registers, effective 18 March 2027.</li><li><strong>Cloud, SaaS, BPO and managed service suppliers to UK financial services.</strong> The critical third parties regime went live on 13 July 2026 with AWS, Google Cloud, Microsoft and Oracle designated. Everyone below that threshold now absorbs the diligence burden as a "material third party", and ISO 22301 is the artefact buyers ask for.</li><li><strong>Data centres, telecoms, logistics and outsourced service providers.</strong> Contractual mandate in supplier resilience schedules, rather than statute. It appears in the schedule, not the specification, which is why it is often discovered late.</li></ul>
+
+        <h3 class="sec">Where organisations get caught out</h3>
+<h3>A business impact analysis built from IT's recovery time objectives</h3><p>This breaches 8.2.2 c) and d). The process must assess impacts over time against defined impact types and criteria, and from that identify the point at which impact becomes unacceptable. RTO is a downstream note, not the input. Working backwards from what IT can currently deliver produces a BIA that documents your constraints rather than your requirements.</p><h3>Continuity strategies chosen without costing the resources to deliver them</h3><p>Clause 8.3.4 requires each resource category to be determined. "Relocate to Site B" with no seat count, no data replication arrangement and no supplier standby contract fails here, and it fails in the incident too.</p><h3>An annual desktop exercise treated as satisfying the whole of clause 8</h3><p>Clause 8.6 is a separate requirement from 8.5 exercising and from 9.2 internal audit. You must periodically evaluate the suitability, adequacy and effectiveness of the BIA, risk assessment, strategies, solutions and plans, and evaluate them again after every disruption, test and exercise. It is the most commonly missed clause in the standard.</p>
+
+      </div></div></div>
+      </div>
+      <div class="sc-wrap">
+      <div class="sc-card">
+        <button class="sc-open" type="button" aria-expanded="false">
+          <span class="ttl">ISO 13485</span>
+          <span class="ed mono">ISO 13485:2016</span>
+          <span class="cat">Medical device quality</span>
+          <span class="use">The one major ISO management system standard that is not Annex SL, and, since February 2026, the one written into United States federal law.</span>
+          <span class="sc-more">Read more <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span>
+        </button>
+        <div class="sc-foot">
+          <span class="docs">45 documents</span>
+          <a class="sc-buy" href="https://www.sentinelbusinesssolutions.net/product-page/iso-13485-document-pack" target="_top">Buy &middot; £149.99</a>
+        </div>
+      </div>
+      <div class="sc-detail"><div><div class="body">
+
+        <span class="eyebrow-sm">What it is</span>
+<p>ISO 13485 specifies quality management system requirements for organisations involved in the life cycle of a medical device. The clue is in the subtitle: <em>requirements for regulatory purposes</em>. It exists to satisfy regulators, not customers, which is why it deliberately omits ISO 9001's customer satisfaction and continual improvement obligations in favour of maintaining effectiveness and meeting regulatory requirements.</p><p>The single most-missed fact about it is structural. <strong>ISO 13485 has clauses 4 to 8, not 4 to 10.</strong> It follows the ISO 9001:2008 architecture. There is no clause 4.1 context of the organisation, no 6.1 risks and opportunities, no clause 9 and no clause 10. It still carries a named management representative at 5.5.2, the role ISO 9001 deleted in 2015.</p><p>That is why integrating ISO 13485 with ISO 9001, 14001 or 45001 is genuinely harder than integrating any two Annex SL standards. Annex B of the 2016 edition maps the two if you need to run a combined system.</p>
+
+        <h3 class="sec">Key facts</h3>
+<dl><dt>Current edition</dt><dd>ISO 13485:2016 — Medical devices — Quality management systems — Requirements for regulatory purposes (3rd edition, 1 March 2016, 36 pages)</dd><dt>Revision</dt><dd>None. ISO/TC 210 reviewed and <strong>confirmed</strong> the 2016 edition on 31 October 2025, a deliberate decision not to revise</dd><dt>Amendment</dt><dd><strong>Amendment 1:2024 on climate action does not apply.</strong> ISO 13485 is not a Harmonized Structure standard</dd><dt>Certifiable</dt><dd>Yes, UKAS-accredited and inside the IAF MLA. Separate from UK Approved Body designation for UKCA marking</dd><dt>Structure</dt><dd><strong>Clauses 4 to 8</strong>, based on ISO 9001:2008, rather than the clause 4 to 10 Harmonized Structure</dd></dl>
+
+        <h3 class="sec">Who needs it</h3>
+<p>Three groups, and for two of them the driver is a national regulator rather than a customer:</p><ul><li><strong>GB manufacturers, own-brand labellers and contract manufacturers.</strong> UK MDR 2002 and UKCA marking via a UK Approved Body. MHRA notes that using standards is not mandatory, but in practice no UK Approved Body will grant a QMS certificate against anything else.</li><li><strong>UK and EU manufacturers exporting to the United States.</strong> The FDA's Quality Management System Regulation took effect on 2 February 2026 and incorporates ISO 13485:2016 by reference into 21 CFR Part 820. This is the largest change in US device quality regulation in three decades.</li><li><strong>Suppliers into NHS trusts and into EU MDR/IVDR conformity assessment.</strong> EU MDR Annex IX requires a full QMS audited by a Notified Body, for which EN ISO 13485 is the de facto route. GB recognition of CE-marked devices runs to 30 June 2028 or 2030 depending on the route.</li></ul>
+
+        <h3 class="sec">Where organisations get caught out</h3>
+<h3>Treating the medical device file as the EU technical documentation, or keeping one file for the whole portfolio</h3><p>Clause 4.2.3 requires a file, or a reference set, <em>for each medical device type or family</em>: general description, intended use, labelling, specifications, manufacturing and measuring procedures, and installation and servicing requirements. Auditors pick a device and ask for its file.</p><h3>Spreadsheets, eQMS modules, ERP and test software running unvalidated</h3><p>Clause 7.5.6 covers validation of computer software used in production and service provision; clause 4.1.6 covers software used in the quality management system itself. Each requires a documented, risk-proportionate approach with records. This is the most common ISO 13485 major nonconformity, and since February 2026 it is a QMSR exposure as well.</p><h3>Complaint handling and vigilance run as one undifferentiated customer feedback process</h3><p>Clause 8.2.2 requires a documented complaint-handling procedure with defined timeliness, investigation, and a recorded rationale where no investigation is performed. Clause 8.2.3 separately requires a documented procedure for notifying regulatory authorities and issuing advisory notices. Under the GB post-market surveillance regulations in force since 16 June 2025, conflating them is a regulatory problem rather than an audit finding.</p>
+
+      </div></div></div>
+      </div>
+      <a class="sc" href="https://www.sentinelbusinesssolutions.net/standards/iso-22000/iso-22000" target="_top">
+        <span class="ttl">ISO 22000</span>
+        <span class="ed mono">ISO 22000:2018</span>
+        <span class="cat">Food safety</span>
+        <span class="use">The platform every GFSI-recognised food safety scheme is built on, and, on its own, not enough for a UK retailer listing.</span>
+        <span class="meta">
+          <span class="docs">43 documents</span>
+          <span class="price">£149.99</span>
+        </span>
+      </a>
+      <a class="sc" href="https://www.sentinelbusinesssolutions.net/standards/iso-50001/iso-50001" target="_top">
+        <span class="ttl">ISO 50001</span>
+        <span class="ed mono">ISO 50001:2018</span>
+        <span class="cat">Energy management</span>
+        <span class="use">The standard that used to be one of four ways out of an ESOS audit. Since June 2026 it is one of two, and the only one that removes the Lead Assessor entirely.</span>
+        <span class="meta">
+          <span class="docs">33 documents</span>
+          <span class="price">£149.99</span>
+        </span>
+      </a>
+      <a class="sc" href="https://www.sentinelbusinesssolutions.net/standards/iso-28000/iso-28000" target="_top">
+        <span class="ttl">ISO 28000</span>
+        <span class="ed mono">ISO 28000:2022</span>
+        <span class="cat">Security management</span>
+        <span class="use">The 2022 edition dropped “supply chain” from its title. The UK accreditation infrastructure has not caught up, and that creates an opportunity.</span>
+        <span class="meta">
+          <span class="docs">40 documents</span>
+          <span class="price">£149.99</span>
+        </span>
+      </a>
+      <a class="sc" href="https://www.sentinelbusinesssolutions.net/standards/iso-39001/iso-39001" target="_top">
+        <span class="ttl">ISO 39001</span>
+        <span class="ed mono">ISO 39001:2012</span>
+        <span class="cat">Road traffic safety</span>
+        <span class="use">The only mainstream ISO management system standard that tells you what to measure, and the one that makes your vehicle purchasing policy auditable.</span>
+        <span class="meta">
+          <span class="docs">28 documents</span>
+          <span class="price">£149.99</span>
+        </span>
+      </a>
+      <a class="sc" href="https://www.sentinelbusinesssolutions.net/standards/iso-41001/iso-41001" target="_top">
+        <span class="ttl">ISO 41001</span>
+        <span class="ed mono">ISO 41001:2018</span>
+        <span class="cat">Facility management</span>
+        <span class="use">The only FM-specific certifiable ISO standard, and one whose second edition is close enough that you should negotiate transition terms before you sign.</span>
+        <span class="meta">
+          <span class="docs">29 documents</span>
+          <span class="price">£149.99</span>
+        </span>
+      </a>
+      <a class="sc" href="https://www.sentinelbusinesssolutions.net/standards/iso-44001/iso-44001" target="_top">
+        <span class="ttl">ISO 44001</span>
+        <span class="ed mono">ISO 44001:2017</span>
+        <span class="cat">Collaborative business relationships</span>
+        <span class="use">The only ISO management system standard that requires you to plan the end of the relationship before you begin it.</span>
+        <span class="meta">
+          <span class="docs">35 documents</span>
+          <span class="price">£149.99</span>
+        </span>
+      </a>
+      <a class="sc" href="https://www.sentinelbusinesssolutions.net/standards/iso-56001/iso-56001" target="_top">
+        <span class="ttl">ISO 56001</span>
+        <span class="ed mono">ISO 56001:2024</span>
+        <span class="cat">Innovation management</span>
+        <span class="use">The first innovation standard you can actually be certified against, and one where you should time the certificate to the accreditation scheme rather than to a salesperson&#x27;s quarter.</span>
+        <span class="meta">
+          <span class="docs">42 documents</span>
+          <span class="price">£149.99</span>
+        </span>
+      </a>
+      <a class="sc" href="https://www.sentinelbusinesssolutions.net/standards/iso-20121/iso-20121" target="_top">
+        <span class="ttl">ISO 20121</span>
+        <span class="ed mono">ISO 20121:2024</span>
+        <span class="cat">Event sustainability</span>
+        <span class="use">The standard a UK buyer can demand and no UK supplier can currently deliver in accredited form, and UKAS says so in a footnote.</span>
+        <span class="meta">
+          <span class="docs">30 documents</span>
+          <span class="price">£149.99</span>
+        </span>
+      </a>
+      <a class="sc" href="https://www.sentinelbusinesssolutions.net/standards/iso-20000-1/iso-20000-1" target="_top">
+        <span class="ttl">ISO/IEC 20000-1</span>
+        <span class="ed mono">ISO/IEC 20000-1:2018</span>
+        <span class="cat">IT service management</span>
+        <span class="use">The certificate that says you run services well rather than securely, and one whose scope UKAS has explicitly fenced.</span>
+        <span class="meta">
+          <span class="docs">37 documents</span>
+          <span class="price">£149.99</span>
+        </span>
+      </a>
+      <a class="sc" href="https://www.sentinelbusinesssolutions.net/standards/iso-42001/iso-42001" target="_top">
+        <span class="ttl">ISO/IEC 42001</span>
+        <span class="ed mono">ISO/IEC 42001:2023</span>
+        <span class="cat">AI management</span>
+        <span class="use">The first certifiable standard for governing artificial intelligence: what it asks of you, who actually needs it, and how it lines up with the EU AI Act.</span>
+        <span class="meta">
+          <span class="docs">78 documents</span>
+          <span class="price">£179.99</span>
+        </span>
+      </a>
+    </div>
+  </section>
+
+
+    <!-- ══════════════ what the guide does ══════════════
+       The single-document price is £19.99, so the pack cannot sell on unit
+       arithmetic: it does not win until the thirteenth document. It sells on
+       the guide, which is not available separately. That claim only works if
+       the page says concretely what the guide contains, so this section is
+       written from the guides themselves rather than from adjectives. -->
+  <section class="sec guide-block" id="guide">
+    <div class="sec-head">
+      <span class="eyebrow">Included with every pack</span>
+      <h2>How the implementation guide works</h2>
+      <p>The implementation guide is how the document packs become a fully fledged management
+        system, rather than just a downloaded folder of templates. Every document in the pack is
+        broken down into the same five part structure:</p>
+    </div>
+
+    <div class="guide-grid">
+      <div class="gcard">
+        <span class="gnum">01</span>
+        <h3>What it is for</h3>
+        <p>The clause it answers to, who owns it, and why the document exists, including
+          the failure it is there to prevent. Not a description of the file: an account of the risk.</p>
+      </div>
+      <div class="gcard">
+        <span class="gnum">02</span>
+        <h3>How it is used</h3>
+        <p>Which section does what, which fields are deliberately left blank for you to set, and
+          which part is the diagnostic. Written so you can hand it to somebody else.</p>
+      </div>
+      <div class="gcard">
+        <span class="gnum">03</span>
+        <h3>What good looks like</h3>
+        <p>The way this is done well, and the specific way it usually goes wrong. This is the part
+          that reads like a consultant rather than a template, because it names the failure most
+          services do not know they have.</p>
+      </div>
+      <div class="gcard">
+        <span class="gnum">04</span>
+        <h3>The process around it</h3>
+        <p>A numbered sequence for putting it in place. Who reads what, who agrees it, where it gets minuted, and what has to be notified and by when.</p>
+      </div>
+      <div class="gcard">
+        <span class="gnum">05</span>
+        <h3>What it connects to</h3>
+        <p>The other documents it depends on and feeds, each with the reason for the link. This is
+          how the pack behaves as a system instead of forty unrelated files.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="abi" id="improve">
+    <div class="abi-head">
+      <span class="eyebrow">Step three · Improve</span>
+      <h2>Once the documents are in place</h2>
+      <p>A pack closes the gaps you have today. Keeping them closed is a different job, and it is
+        the one a surveillance audit actually tests.</p>
+    </div>
+    <div class="abi-grid">
+      <div class="stepc">
+        <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"/><path d="m16.2 16.2 4.3 4.3"/></svg></span>
+        <h3>Reassess</h3>
+        <p>Run the assessment again once the documents are embedded. It is free, so there is no
+          reason not to, and the second clause scorecard is the one worth taking to a management
+          review.</p>
+      </div>
+      <div class="stepc">
+        <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M14 3v5h5"/><path d="M19 8v12H5V3h9z"/><path d="M9 13h6M9 17h4"/></svg></span>
+        <h3>Keep the records current</h3>
+        <p>Registers, logs and audit trails are only worth holding if they are filled in. The guide
+          sets out who owns each one and how often it should be reviewed.</p>
+      </div>
+      <div class="stepc">
+        <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 20V10M9 20V4M15 20v-7M21 20V7"/></svg></span>
+        <h3>Watch for new editions</h3>
+        <p>Standards are revised, and a superseded edition is the fastest way to fail a
+          recertification audit. Each pack states the edition it is written against.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="candour">
+    <h3>What we will not tell you</h3>
+    <p>That buying documents makes you certified. Certification comes from an accredited body after
+      an audit, and no template pack changes that. What these documents do is remove the blank page,
+      so the work you take into the audit is your own evidence rather than your own formatting.</p>
+  </section>
+
+  <!-- Unlike the CQC side, this question is real: a firm knows its trade but
+       not whether it needs 27001 or 42001, or both. Kept, and given something
+       to say. It also carried id="assess", duplicating the section above. -->
+  <section class="cta" id="which-standard">
+    <h2>Not sure which standard applies?</h2>
+    <p>Most firms arrive because a customer asked for one by name, and that is usually the right
+      answer. Where it gets harder is the overlap: information security and AI management share a
+      great deal but answer different questions, and quality and environmental are routinely run as
+      one system rather than two. If you already hold one certificate, the clause structure is the
+      same from clause 4 to clause 10, so a second standard is far less work than the first.</p>
+    <div class="row">
+      <a class="btn btn-ghost" href="https://www.sentinelbusinesssolutions.net/cqc" target="_top">I need CQC instead</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>Sentinel Business Solutions · Building Better Businesses Through Compliance.</p>
+    <p class="rev">Counts verified against the packs · ISO 55001 withdrawn 26 August 2026</p>
+  </footer>
+
+</div>
+
+<script>
+/* hero portrait loop: hover on desktop, in view on touch. Empty data-loop = still only. */
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine   = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var fig = document.querySelector('.portrait');
+  if (!fig) return;
+  var v = fig.querySelector('.loop');
+  var src = v && v.getAttribute('data-loop');
+  if (!v || !src || reduce) return;
+  var loaded = false;
+  function play(){ if(!loaded){ v.src = src; loaded = true; }
+    var p = v.play(); if(p && p.catch) p.catch(function(){});
+    fig.classList.add('playing'); }
+  function stop(){ v.pause(); fig.classList.remove('playing'); }
+  if (fine){
+    fig.addEventListener('pointerenter', play);
+    fig.addEventListener('pointerleave', stop);
+  } else if ('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){
+      es.forEach(function(e){ e.isIntersecting ? play() : stop(); });
+    },{threshold:.55}).observe(fig);
+  }
+})();
+</script>
+
+<!-- Wix embed height reporter. Keep it last. -->
+<script type="text/javascript" src="//static.parastorage.com/services/js-sdk/1.79.0/js/wix.min.js"></script>
+<script>
+/* Height reporting.
+ *
+ * A Wix HTML embed is an iframe with a height fixed in the editor. That height
+ * has to be right at every breakpoint, and it never is: this page is far taller
+ * stacked on a phone than it is in three columns on a desktop, so a height that
+ * fits one leaves a gap or a scrollbar on the other. Setting it by hand, twice,
+ * for every page, is the painful way.
+ *
+ * So the page measures itself and tells the parent. Two routes, because which
+ * one works depends on how the embed was added:
+ *
+ *   Wix.setHeight  works when the component loads the Wix SDK.
+ *   postMessage    works everywhere, but needs six lines of Velo on the page
+ *                  to listen. See the snippet supplied with this file.
+ *
+ * Both fire on load, on resize, when webfonts finish (which changes wrapping),
+ * and whenever anything in the body changes size. The two timeouts catch late
+ * images. Sending the same height twice is harmless.
+ */
+(function(){
+  var last = 0;
+  function report(){
+    try{
+      var h = Math.ceil(document.documentElement.getBoundingClientRect().height) + 8;
+      if (Math.abs(h - last) < 2) return;   // ignore sub-pixel jitter
+      last = h;
+      if (window.Wix && Wix.setHeight) Wix.setHeight(h);
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ sentinelHeight: h }, '*');
+      }
+    }catch(e){}
+  }
+  window.addEventListener('load', report);
+  window.addEventListener('resize', report);
+  window.addEventListener('orientationchange', function(){ setTimeout(report, 300); });
+  if ('ResizeObserver' in window) new ResizeObserver(report).observe(document.body);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(report);
+  document.addEventListener('DOMContentLoaded', report);
+  setTimeout(report, 400); setTimeout(report, 1600); setTimeout(report, 4000);
+})();
+</script>
+
+<script>
+/* Escaping the embed.
+ *
+ * A Wix HTML embed is a sandboxed iframe. Links marked target="_top" are the
+ * normal way to break out of it and navigate the real page, but the browser
+ * only permits that if the iframe's sandbox grants top-level navigation. When
+ * it does not, the click is refused SILENTLY: no error, no console message,
+ * no URL change. Every nav link, footer link and card in this page uses
+ * target="_top", so they all fail together and it looks like the buttons are
+ * dead.
+ *
+ * This handler tries three routes in order and stops at the first that works,
+ * so it is correct whether or not the sandbox is the actual cause:
+ *
+ *   1. Set the top window's location directly. Works when permitted; throws a
+ *      SecurityError when not, which is caught.
+ *   2. Ask the parent page to navigate, for sites running the Velo snippet.
+ *      Costs nothing if nobody is listening.
+ *   3. Open in a new tab, which sandboxes allow far more readily than
+ *      top-navigation. Not ideal, but a new tab beats a dead button.
+ *
+ * Deliberately NOT intercepted:
+ *   - in-page anchors (#assess), which must scroll rather than navigate
+ *   - anything with a download attribute, which would lose the filename
+ *   - mailto and tel, which the browser handles better than we can
+ */
+(function () {
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+
+    var raw = a.getAttribute('href') || '';
+    if (!raw || raw.charAt(0) === '#') return;
+    if (a.hasAttribute('download')) return;
+    if (/^(mailto:|tel:)/i.test(raw)) return;
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) return;
+
+    var url = a.href;
+    e.preventDefault();
+
+    try {
+      if (window.top && window.top !== window) {
+        window.top.location.href = url;
+        return;
+      }
+      window.location.href = url;
+      return;
+    } catch (err) { /* sandbox refused it; fall through */ }
+
+    try {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ sentinelNavigate: url }, '*');
+      }
+    } catch (err) {}
+
+    window.open(url, '_blank', 'noopener');
+  }, true);
+})();
+</script>
+<script>
+/* One open at a time. A page of sixteen standards all expanded is a wall, and
+   the point of the card grid is comparison. Closing the others keeps the one
+   the reader chose in view. */
+(function () {
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest && e.target.closest('button.sc-open');
+    if (!btn) return;
+    var open = btn.getAttribute('aria-expanded') === 'true';
+    document.querySelectorAll('button.sc-open[aria-expanded="true"]').forEach(function (b) {
+      if (b !== btn) b.setAttribute('aria-expanded', 'false');
+    });
+    btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+    if (!open) {
+      /* Wait for the row to grow before scrolling, or the browser measures the
+         collapsed height and lands short. */
+      setTimeout(function () {
+        var r = btn.getBoundingClientRect();
+        if (r.top < 90) btn.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 400);
+    }
+  });
+})();
+</script>
+</body>
+</html>

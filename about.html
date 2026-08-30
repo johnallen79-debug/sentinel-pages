@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>About Sentinel Business Solutions</title>
+<meta name="description" content="Sentinel Business Solutions helps organisations build stronger, more responsible ways of working. Founded by John Allen, ISO consultant and chief ISO consultant to a national UK charity.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F9FC; --surface:#FFF; --soft:#EAF2FF; --graphite:#1A2029;
+  --border:rgba(16,35,63,.11); --border2:rgba(16,35,63,.22);
+  --text:#10233F; --dim:#46586F; --faint:#5F7085;
+  --blue:#176BFF; --blue-d:#0F52C9;
+  --amber:#C68A2B; --amber-t:#8A5E12;
+  --green:#2E8666; --green-t:#20624B;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--text);position:relative;overflow-x:hidden;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;
+  font-size:16.5px;line-height:1.68;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;letter-spacing:-.015em;line-height:1.14;margin:0 0 .45em}
+h1{font-size:clamp(32px,4vw,44px);font-weight:700}
+h2{font-size:clamp(24px,2.6vw,32px);font-weight:600}
+h3{font-size:17px;font-weight:600;margin-bottom:.35em}
+p{margin:0 0 1em;color:var(--dim)}
+strong{color:var(--text);font-weight:600}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 26px;position:relative;z-index:1}
+
+.circuit{position:absolute;top:0;left:0;right:0;height:620px;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(to bottom,rgba(247,249,252,.30) 0,rgba(247,249,252,.88) 56%,#F7F9FC 92%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cg fill='none' stroke='%23176BFF' stroke-opacity='.10' stroke-width='1'%3E%3Cpath d='M0 64h96l22 22h142M0 190h58l24-24h178'/%3E%3C/g%3E%3Cg fill='%23176BFF' fill-opacity='.14'%3E%3Ccircle cx='96' cy='64' r='2.4'/%3E%3Ccircle cx='58' cy='190' r='2.4'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:100% 100%,260px 260px;background-repeat:no-repeat,repeat}
+
+header{padding:20px 0;position:relative;z-index:2;background:var(--surface);
+  border-bottom:1px solid var(--border)}
+.bar{display:flex;align-items:center;gap:26px}
+.lockup{display:flex;align-items:center;gap:12px;text-decoration:none;flex:none}
+.lockup .mk{width:34px;height:38px;flex:none;display:block}
+.lockup .tx{display:flex;flex-direction:column;line-height:1.1}
+.lockup .nm{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;
+  letter-spacing:-.01em;color:var(--text)}
+.lockup .sub{font-size:10px;font-weight:600;letter-spacing:.19em;text-transform:uppercase;
+  color:var(--faint)}
+nav{margin-left:auto;display:flex;align-items:center;gap:26px}
+nav a.lnk{font-size:14.5px;font-weight:500;color:var(--dim);text-decoration:none;
+  transition:color .18s var(--ease)}
+nav a.lnk:hover{color:var(--text)}
+nav a.lnk[aria-current="page"]{color:var(--text);font-weight:600}
+@media(max-width:960px){nav .hide-sm{display:none}}
+
+.btn{white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  min-height:44px;padding:0 22px;border-radius:999px;text-decoration:none;
+  font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;
+  border:1px solid transparent;cursor:pointer;
+  transition:transform .18s var(--ease),box-shadow .18s var(--ease),background .18s var(--ease)}
+.btn-primary{background:var(--blue);color:#fff}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(23,107,255,.28)}
+.btn-ghost{background:var(--surface);color:var(--text);border-color:var(--border2)}
+.btn-ghost:hover{transform:translateY(-1px);box-shadow:0 5px 14px rgba(16,35,63,.08)}
+.btn svg{transition:transform .18s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+
+.crumb{padding:22px 0 0;font-size:13.5px;color:var(--faint)}
+.crumb a{color:var(--faint);text-decoration:none}
+.crumb a:hover{color:var(--text)}
+
+/* hero */
+.phero{padding:8px 0 8px;display:grid;gap:36px;grid-template-columns:1fr;align-items:center}
+@media(min-width:960px){/* The montage no longer sits beside the copy at all - see .herovid. */}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;background:var(--soft);
+  color:var(--blue-d);border:1px solid rgba(23,107,255,.22);border-radius:999px;padding:6px 16px;
+  font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:20px}
+.phero h1{max-width:22ch}
+.standfirst{font-size:18.5px;color:var(--dim);max-width:56ch;margin-bottom:26px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+
+.portrait{position:relative;margin:0;aspect-ratio:4/5;overflow:hidden;border-radius:18px;
+  background:var(--soft);border:1px solid var(--border)}
+.portrait .still,.portrait .loop{position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:50% 16%;display:block}
+.portrait .loop{opacity:0;transition:opacity .32s var(--ease)}
+.portrait.playing .loop{opacity:1}
+
+/* facts */
+.facts{margin:44px 0 0;padding:24px 0;border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);display:grid;gap:24px;grid-template-columns:1fr 1fr}
+@media(min-width:900px){.facts{grid-template-columns:repeat(4,1fr)}}
+.fact .v{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:28px;
+  color:var(--text);display:block;line-height:1.1}
+.fact .l{font-size:13.5px;color:var(--faint);display:block;margin-top:4px}
+
+/* standard cards */
+.sec{margin:66px 0 0}
+.sec-head{max-width:62ch;margin-bottom:28px}
+.sec-head p:last-child{margin-bottom:0}
+.grid{display:grid;gap:16px;grid-template-columns:1fr}
+@media(min-width:780px){.grid{grid-template-columns:1fr 1fr}}
+.sc{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--border);
+  border-radius:14px;padding:20px 22px;text-decoration:none;color:inherit;
+  transition:transform .18s var(--ease),box-shadow .18s var(--ease),border-color .18s var(--ease)}
+.sc:hover{transform:translateY(-3px);border-color:var(--border2);
+  box-shadow:0 10px 26px rgba(16,35,63,.09)}
+.sc .ttl{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:19px;color:var(--text)}
+.sc .ed{color:var(--faint);display:block;margin:3px 0 10px}
+.sc .cat{font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--blue-d);display:block;margin-bottom:10px}
+.sc .use{font-size:15.5px;color:var(--dim);margin-bottom:18px}
+.sc .meta{margin-top:auto;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  padding-top:14px;border-top:1px solid var(--border)}
+.sc .docs{font-size:13.5px;color:var(--faint)}
+.sc .price{margin-left:auto;font-family:'Space Grotesk',sans-serif;font-weight:600;
+  font-size:16px;color:var(--blue-d)}
+/* Second figure in the card footer. Same size and weight as the document count,
+   pushed to the right: the two are a matched pair, not a headline and a price. */
+.sc .guide{margin-left:auto;font-size:13.5px;color:var(--faint)}
+
+/* pack panel */
+.pack{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:34px}
+@media(min-width:900px){.pack{padding:40px 42px;display:grid;gap:40px;
+  grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);align-items:start}}
+.pack h2{margin-bottom:.3em}
+.pack .buybox{background:var(--soft);border-radius:16px;padding:24px}
+.pack .buybox .amt{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:34px;
+  color:var(--text);display:block;line-height:1.1}
+.pack .buybox .sub{font-size:13.5px;color:var(--faint);display:block;margin:4px 0 18px}
+.pack .buybox .btn{width:100%}
+.pack ul{margin:0 0 18px;padding-left:20px;color:var(--dim)}
+.pack li{margin-bottom:.35em;font-size:15.5px}
+
+/* abi */
+.abi{margin:66px 0 0;background:var(--surface);border:1px solid var(--border);
+  border-radius:20px;padding:38px}
+@media(min-width:1000px){.abi{padding:44px 46px}}
+.abi-head{max-width:64ch;margin-bottom:32px}
+.abi-head p:last-child{margin-bottom:0}
+.abi-grid{display:grid;gap:24px;grid-template-columns:1fr}
+@media(min-width:820px){.abi-grid{grid-template-columns:repeat(3,1fr)}}
+.stepc{border-top:2px solid var(--soft);padding-top:20px}
+.stepc .ic{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;
+  border-radius:12px;background:var(--soft);margin-bottom:14px}
+.stepc .ic svg{width:19px;height:19px;stroke:var(--blue-d);fill:none;stroke-width:2.1;
+  stroke-linecap:round;stroke-linejoin:round}
+.stepc h3{font-size:19px}
+.stepc p{font-size:15px;margin:0}
+
+.candour{margin:52px 0 0;background:var(--surface);border:1px solid var(--border);
+  border-left:3px solid var(--amber);border-radius:14px;padding:24px 26px;max-width:74ch}
+.candour p:last-child{margin-bottom:0}
+
+.cta{margin:60px 0 0;background:var(--graphite);border-radius:20px;padding:46px 40px;
+  text-align:center;color:#fff}
+.cta h2{color:#fff;max-width:22ch;margin-inline:auto}
+.cta p{color:rgba(255,255,255,.74);max-width:54ch;margin:0 auto 24px}
+.cta .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.cta .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.28)}
+.cta .btn-ghost:hover{background:rgba(255,255,255,.07);box-shadow:none}
+
+footer{margin:40px 0 0;padding:24px 0 44px;border-top:1px solid var(--border);
+  display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+footer p{font-size:13.5px;color:var(--faint);margin:0}
+footer .rev{margin-left:auto}
+
+
+/* long-form CMS copy */
+.prose{max-width:70ch}
+.prose p{margin:0 0 1.05em}
+.prose p:last-child{margin-bottom:0}
+.prose h3{font-size:18px;margin:1.6em 0 .5em}
+.prose h3:first-child{margin-top:0}
+.prose ul{margin:0 0 1.05em;padding-left:20px;color:var(--dim)}
+.prose li{margin-bottom:.6em}
+.prose em{color:var(--text);font-style:italic}
+.prose a{color:var(--blue-d)}
+.prose dl{margin:0;display:grid;grid-template-columns:1fr;gap:0}
+@media(min-width:680px){.prose dl{grid-template-columns:minmax(150px,190px) 1fr}}
+.prose dt{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;
+  color:var(--faint);text-transform:uppercase;letter-spacing:.06em;
+  padding:12px 0 2px;border-top:1px solid var(--border)}
+.prose dd{margin:0;color:var(--dim);font-size:15.5px;padding:0 0 12px}
+@media(min-width:680px){.prose dd{padding:12px 0;border-top:1px solid var(--border)}
+  .prose dt{padding:12px 0}}
+.prose dl > dt:first-of-type,.prose dl > dt:first-of-type + dd{border-top:0}
+.prose table{width:100%;border-collapse:collapse;margin:1.2em 0 .4em;font-size:14.5px;
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.prose th,.prose td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--border);
+  color:var(--dim)}
+.prose th{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:12.5px;
+  text-transform:uppercase;letter-spacing:.07em;color:var(--faint)}
+.prose tr:last-child td{border-bottom:0}
+
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px 30px}
+.hook{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--amber);
+  border-radius:16px;padding:28px 30px;max-width:880px}
+.hook .prose{max-width:none}
+.hook .kick{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--amber-t);display:block;margin-bottom:10px}
+.hook h2{font-size:clamp(21px,2.2vw,26px);max-width:32ch}
+.two{display:grid;gap:26px;grid-template-columns:1fr}
+@media(min-width:940px){.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px}}
+.srcs{font-size:13.5px;color:var(--faint);margin-top:14px}
+.srcs a{color:var(--faint)}
+
+@media(max-width:520px){
+  nav{gap:0}
+  nav .btn{font-size:14px;padding:0 16px;min-height:42px}
+  .lockup .mk{width:30px;height:34px}.lockup .nm{font-size:18px}.lockup .sub{font-size:9px}
+  .abi,.pack{padding:28px 22px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .portrait .loop{display:none}
+}
+
+/* the assessment block */
+.assess-block{background:var(--soft)}
+.assess-grid{display:grid;gap:34px;grid-template-columns:1fr}
+.assess-grid h2{margin-top:10px;max-width:28ch}
+.assess-grid .sub{margin-top:14px;font-size:16.5px;max-width:78ch}
+.ticks{margin:22px 0 0;padding:0;list-style:none}
+@media(min-width:900px){.ticks{columns:2;column-gap:40px}
+  .ticks li{break-inside:avoid}}
+.ticks li{position:relative;padding-left:30px;margin-bottom:10px;font-size:15px;color:var(--dim)}
+.ticks li::before{content:"";position:absolute;left:2px;top:8px;width:14px;height:8px;
+  border-left:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:rotate(-45deg)}
+.assess-grid .row{margin-top:26px}
+.tiny{margin-top:12px;font-size:13px;color:var(--faint)}
+
+.assess-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;
+  overflow:hidden;box-shadow:0 1px 2px rgba(15,35,65,.03),0 14px 40px rgba(15,35,65,.07)}
+.assess-head{display:flex;align-items:center;gap:10px;padding:16px 20px;
+  border-bottom:1px solid var(--border);font-family:'Space Grotesk',sans-serif;
+  font-weight:600;font-size:15px;color:var(--text)}
+.assess-head .dot{width:9px;height:9px;border-radius:50%;background:var(--blue)}
+.assess-body{padding:18px 20px 8px}
+.kq{display:grid;grid-template-columns:88px 1fr auto;align-items:center;gap:12px;margin-bottom:14px}
+.kq span{font-size:13.5px;color:var(--dim)}
+.kq em{display:block;height:7px;border-radius:4px;background:var(--soft)}
+.kq i{display:block;height:7px;border-radius:4px;background:var(--blue);opacity:.9}
+.kq b{font-size:11.5px;font-weight:600;color:var(--faint);white-space:nowrap}
+.assess-body .kq::after{content:""}
+.assess-foot{padding:12px 20px 16px;border-top:1px solid var(--border);
+  font-size:12px;color:var(--faint)}
+
+/* the guide section */
+.guide-block{background:var(--surface)}
+.guide-grid{display:grid;gap:18px;grid-template-columns:1fr;margin-top:34px}
+@media(min-width:760px){.guide-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1100px){.guide-grid{grid-template-columns:repeat(3,1fr)}}
+.gcard{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:24px 22px}
+.gcard .gnum{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;
+  letter-spacing:.1em;color:var(--blue)}
+.gcard h3{margin:10px 0 8px;font-family:'Space Grotesk',sans-serif;font-size:17px;
+  font-weight:600;color:var(--text)}
+.gcard p{font-size:14.5px;line-height:1.62;color:var(--dim)}
+
+/* The embedded portal.
+   Sized to the viewport rather than a fixed box, so the assessment gets as much
+   of the screen as there is. It cannot resize its parent - it is an iframe
+   inside the page embed - so the height is set here and the app scrolls within
+   it. min-height keeps it usable on a short laptop screen; max-height stops it
+   growing absurdly tall on a large monitor. */
+.app-frame{padding:0;overflow:hidden;background:var(--surface);border:0;box-shadow:none}
+.app-frame iframe{display:block;width:100%;border:0;
+  height:clamp(620px, calc(100vh - 120px), 1100px)}
+@media(max-width:1000px){.app-frame iframe{height:clamp(560px, calc(100vh - 80px), 900px)}}
+
+/* A label above the frame, so the panel reads as a tool rather than as more
+   page. The border does most of the work; this says what the object is. */
+.app-label{display:flex;align-items:center;gap:9px;margin:0 0 12px;
+  font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:600;color:var(--text)}
+.app-label .dot{width:8px;height:8px;border-radius:50%;background:var(--blue);
+  box-shadow:0 0 0 4px rgba(23,107,255,.14)}
+.app-label em{margin-left:auto;font-style:normal;font-size:12px;font-weight:500;color:var(--faint)}
+
+/* registration, not certification */
+.reg-block{background:var(--surface)}
+.reg-grid{display:grid;gap:18px;grid-template-columns:1fr;margin-top:28px}
+@media(min-width:820px){.reg-grid{grid-template-columns:repeat(3,1fr)}}
+.rcard{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:24px 22px}
+.rcard h3{margin:0 0 8px;font-family:'Space Grotesk',sans-serif;font-size:16.5px;
+  font-weight:600;color:var(--text)}
+.rcard p{font-size:14.5px;line-height:1.62;color:var(--dim)}
+.rcard-warn{background:#FFF9EE;border-color:rgba(138,94,18,.22)}
+.reg-sub{margin:44px 0 0;font-family:'Space Grotesk',sans-serif;font-size:20px;
+  font-weight:600;color:var(--text)}
+
+/* framework timeline */
+.tl{margin-top:44px}
+.tl-lede{margin-top:10px;font-size:15.5px;color:var(--dim);max-width:70ch}
+.tl-table{width:100%;max-width:640px;margin-top:18px;border-collapse:collapse}
+.tl-table td{padding:11px 0;border-bottom:1px solid var(--border);font-size:14.5px;color:var(--dim)}
+.tl-table td:last-child{text-align:right;color:var(--text);font-weight:500;white-space:nowrap}
+.tl-foot{margin-top:18px;font-size:14.5px;color:var(--dim);max-width:74ch}
+
+
+/* Hero montage.
+   muted is REQUIRED, not a preference: browsers block autoplay outright unless
+   the video is muted, so an unmuted loop simply would not start. playsinline
+   stops iOS taking it fullscreen. The poster covers the gap before the first
+   frame decodes, so the panel is never empty. */
+/* The montage, at the page's own width.
+   It ran full-bleed for a while and read as a separate banner rather than part
+   of the page. Held to the 1240px container it lines up with the headline, the
+   pack grid and the footer, which is what makes it look built in rather than
+   dropped on top.
+
+   Height is a letterbox band rather than 16:9: a true 16:9 frame at this width
+   would be 700px tall and push everything below the fold. object-fit crops
+   rather than squashes. */
+.herovid{position:relative;margin:22px 0 30px;width:100%;
+  aspect-ratio:auto;height:clamp(320px, 40vw, 560px);
+  overflow:hidden;border-radius:20px 20px 0 0;border:0;background:var(--soft)}
+
+/* The foot of the picture dissolves into the page.
+   This was the one good thing about the full-bleed version: the clip stopped
+   looking like a box with a video in it and started looking like part of the
+   page. It works here too, and it does more than the shadow did - a shadow
+   draws the edge, this removes it. The gradient sits above the video and is
+   click-through, so it never intercepts anything. */
+.herovid::after{content:"";position:absolute;inset:auto 0 0;height:44%;z-index:1;
+  pointer-events:none;
+  background:linear-gradient(to top,
+    var(--bg) 0%,
+    rgba(247,249,252,.92) 18%,
+    rgba(247,249,252,.55) 48%,
+    rgba(247,249,252,0) 100%)}
+/* object-position sits high: at a wide crop the model frames people
+   centrally, so a centred crop takes the top of their heads off. */
+.herovid video{position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:50% 32%;display:block}
+
+@media (prefers-reduced-motion: reduce){
+  /* Honour the setting: show the poster frame and never start the loop. */
+  .herovid video{display:none}
+  .herovid{background-size:cover;background-position:50% 50%}
+}
+
+/* ECOS is named but not linked: the page does not exist yet, and a nav item
+   that 404s is worse than no nav item. Matches the homepage treatment. */
+.lnk.soon{color:var(--faint);cursor:default}
+.lnk.soon::after{content:"soon";margin-left:6px;font-size:9px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--blue);opacity:.6;
+  vertical-align:2px}
+
+.lede{margin-top:14px;font-size:16.5px;line-height:1.66;color:var(--dim);max-width:74ch}
+
+/* contact */
+.contact-block{background:var(--surface)}
+.cform{margin-top:28px;max-width:760px;display:grid;gap:18px}
+.crow{display:grid;gap:18px;grid-template-columns:1fr}
+@media(min-width:700px){.crow{grid-template-columns:1fr 1fr}}
+.cform label{display:block;font-size:13.5px;font-weight:600;color:var(--text)}
+.cform input,.cform textarea{display:block;width:100%;margin-top:7px;padding:11px 13px;
+  font:400 15px/1.5 Inter,system-ui,sans-serif;color:var(--text);background:var(--bg);
+  border:1px solid var(--border2);border-radius:10px}
+.cform input:focus,.cform textarea:focus{outline:2px solid var(--blue);outline-offset:1px;
+  border-color:transparent}
+.cform textarea{resize:vertical}
+.cactions{display:flex;flex-wrap:wrap;align-items:center;gap:16px}
+.cnote{font-size:13px;color:var(--faint);max-width:44ch;margin:0}
+.cfallback{margin-top:20px;font-size:14.5px;color:var(--dim)}
+.cfallback a{color:var(--blue-d);text-decoration:underline;text-underline-offset:2px}
+
+/* The montage, at the page's own width.
+   Same treatment as the CQC and ISO pages: held to the 1240px container so it
+   lines up with the headline and the sections below, with the foot of the
+   picture dissolving into the page rather than stopping at an edge.
+
+   Height is a letterbox band rather than 16:9, since a true 16:9 frame at this
+   width would be 700px tall and push everything below the fold. object-fit
+   crops rather than squashes, and the crop sits high because the model frames
+   people centrally: a centred crop takes the tops of their heads off. */
+.herovid{position:relative;margin:22px 0 30px;width:100%;
+  aspect-ratio:auto;height:clamp(320px, 40vw, 560px);
+  overflow:hidden;border-radius:20px 20px 0 0;border:0;background:var(--soft)}
+.herovid video{position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:50% 32%;display:block}
+.herovid::after{content:"";position:absolute;inset:auto 0 0;height:44%;z-index:1;
+  pointer-events:none;
+  background:linear-gradient(to top,
+    var(--bg) 0%,
+    rgba(247,249,252,.92) 18%,
+    rgba(247,249,252,.55) 48%,
+    rgba(247,249,252,0) 100%)}
+@media (prefers-reduced-motion: reduce){
+  /* Honour the setting: show the poster frame and never start the loop. */
+  .herovid video{display:none}
+  .herovid{background-size:cover;background-position:50% 32%}
+}
+
+/* the document pack */
+.dl-block{background:var(--surface)}
+.dl-grid{display:grid;gap:18px;grid-template-columns:1fr;margin-top:28px}
+@media(min-width:900px){.dl-grid{grid-template-columns:1fr 1fr .9fr}}
+.dlcard{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:24px 22px}
+.dlcard h3{margin:0 0 10px;font-family:'Space Grotesk',sans-serif;font-size:16.5px;
+  font-weight:600;color:var(--text)}
+.dl-list{margin:0;padding:0;list-style:none}
+.dl-list li{position:relative;padding-left:20px;margin-bottom:9px;font-size:14.5px;
+  line-height:1.6;color:var(--dim)}
+.dl-list li::before{content:"";position:absolute;left:2px;top:9px;width:6px;height:6px;
+  border-radius:50%;background:var(--blue);opacity:.55}
+.dlcard-go{background:var(--soft);border-color:rgba(23,107,255,.2);display:flex;
+  flex-direction:column}
+.dl-meta{font-size:12.5px;color:var(--faint);margin:0 0 16px}
+.dl-btn{align-self:flex-start}
+.dl-note{margin:16px 0 0;font-size:13px;line-height:1.6;color:var(--dim)}
+
+.lede{margin-top:14px;font-size:16.5px;line-height:1.66;color:var(--dim);max-width:74ch}
+.lede.big{margin-top:22px;font-size:20px;line-height:1.5;color:var(--text);max-width:52ch;
+  font-family:'Space Grotesk',sans-serif;font-weight:500}
+.tagline{margin-top:26px;font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:600;
+  color:var(--blue-d)}
+.who-block{background:var(--soft)}
+.who-grid{display:grid;gap:30px;grid-template-columns:1fr;align-items:start}
+@media(min-width:820px){.who-grid{grid-template-columns:200px 1fr;gap:44px}}
+.who-photo{margin:0}
+.who-photo img{display:block;width:180px;height:180px;border-radius:50%;object-fit:cover;
+  border:3px solid var(--surface);box-shadow:0 2px 6px rgba(15,35,65,.08),0 16px 40px rgba(15,35,65,.12)}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="bar">
+      <a class="lockup" href="https://www.sentinelbusinesssolutions.net/" target="_top" aria-label="Sentinel Business Solutions">
+        <svg class="mk" viewBox="0 0 34 38" aria-hidden="true">
+          <path d="M17 1.6 32 7v13.4c0 8.3-6.2 14-15 16.9C8.2 34.4 2 28.7 2 20.4V7z" fill="#10233F"/>
+          <path d="m11.4 19.2 4.1 4.2 7.5-8.2" fill="none" stroke="#176BFF" stroke-width="2.6"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="tx">
+          <span class="nm">Sentinel</span>
+          <span class="sub">Business Solutions</span>
+        </span>
+      </a>
+      <nav>
+        <a class="lnk hide-sm" href="https://www.sentinelbusinesssolutions.net/cqc" target="_top">CQC</a>
+        <a class="lnk hide-sm" href="https://www.sentinelbusinesssolutions.net/iso" target="_top">ISO</a>
+        <a class="lnk hide-sm" href="https://www.sentinelbusinesssolutions.net/ecos" target="_top">ECOS</a>
+        <a class="lnk hide-sm" href="https://www.sentinelbusinesssolutions.net/tools" target="_top">Tools</a>
+        <a class="lnk hide-sm" href="https://www.sentinelbusinesssolutions.net/about" target="_top" aria-current="page">About</a>
+      </nav>
+    </div>
+  </div>
+</header>
+<div class="wrap">
+
+  <p class="crumb"><a href="https://www.sentinelbusinesssolutions.net/" target="_top">Home</a> › About</p>
+
+  <section class="phero">
+    <div>
+      <span class="eyebrow">About Sentinel</span>
+      <h1>Better business should mean better business for everyone</h1>
+      <p class="standfirst">Sentinel Business Solutions was founded on a simple belief: that the way
+        a business succeeds matters as much as the success itself.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <p class="lede">Organisations can be profitable, ambitious and competitive without compromising
+      their principles. Growth should not come at the expense of people, communities or the planet.
+      Compliance should not be a box-ticking exercise, and good governance should mean more than
+      meeting the minimum the law requires.</p>
+    <p class="lede">Our purpose is to help organisations become better, not only in how they operate
+      but in the effect they have on everything around them. We do that through consultancy,
+      management systems, document packs, readiness tools and published guidance.</p>
+  </section>
+
+  <!-- The strongest claim on the page, so it comes first rather than sitting
+       seventh in a list of commitments. It names a real conflict in the
+       industry and commits against it, which does more than any sentence
+       beginning "we believe". -->
+  <section class="sec reg-block" id="advice">
+    <div class="sec-head">
+      <span class="eyebrow">How we work</span>
+      <h2>Advice that does not create work for us</h2>
+      <p>Most compliance advice has a conflict built into it. The consultant who tells you what you
+        need is usually the same one who sells it to you, and the longer the list, the better their
+        year.</p>
+    </div>
+
+    <p class="lede big">We would rather tell you what you do not need.</p>
+
+    <div class="reg-grid">
+      <div class="rcard">
+        <h3>The assessments are free</h3>
+        <p>No account, no email address, no card. They will tell you where you already meet a
+          standard as readily as where you do not. If a gap can be closed by rewording a policy you
+          already have, we would rather say so than sell you a document.</p>
+      </div>
+      <div class="rcard">
+        <h3>The charity standard is given away</h3>
+        <p>ECOS runs to fourteen domains, 117 requirements and twenty-two templates, written for the
+          charity sector and free in full. No payment, no certification body charging thousands for
+          a certificate. If it helps, we ask you to give £25 to a charity instead. Nothing checks
+          whether you did.</p>
+      </div>
+      <div class="rcard">
+        <h3>Nothing is locked</h3>
+        <p>Every document is an ordinary Word or Excel file. Nothing is watermarked, nothing expires
+          and nothing needs our software to open. Rename it, rebrand it, cut it about. Once you have
+          bought it, it is yours.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <span class="eyebrow">Integrity at the centre</span>
+      <h2>Doing the right thing when nobody is watching</h2>
+      <p>Businesses should be honest in their decisions, transparent in their actions and
+        accountable for their impact. That means doing the right thing when it is inconvenient, when
+        it is difficult, and when nobody is looking.</p>
+    </div>
+    <p class="lede">Standards like ISO give organisations a framework for that, but the framework is
+      not the point. What matters is what it represents: consistency, responsibility, evidence,
+      improvement and trust. A certificate on the wall only really has meaning if the organisation
+      lives up to what it stands for.</p>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <span class="eyebrow">People before processes</span>
+      <h2>Organisations succeed because of people</h2>
+      <p>Policies and procedures matter, but they are not what makes an organisation work.</p>
+    </div>
+    <p class="lede">Employees should be treated with dignity, respect and fairness. Workplaces
+      should protect physical and psychological wellbeing. People should be able to contribute
+      ideas, raise concerns and take part in improving the place they work.</p>
+    <p class="lede">The strongest organisations are not the ones that demand most from their people.
+      They are the ones that build conditions in which people can do their best work.</p>
+  </section>
+
+  <!-- Who we are, with the photo. Placed here rather than in the hero: a
+       founder portrait at the top makes the page about the person, and the
+       argument should come first. -->
+  <section class="sec who-block" id="who">
+    <div class="who-grid">
+      <figure class="who-photo">
+        <img src="data:image/jpeg;base64,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" alt="John Allen, founder of Sentinel Business Solutions"
+             width="180" height="180" loading="lazy">
+      </figure>
+      <div>
+        <span class="eyebrow">Who we are</span>
+        <h2>John Allen</h2>
+        <p class="lede">Sentinel Business Solutions was founded by John Allen, an ISO consultant
+          specialising in ISO 9001, 14001 and 27001, alongside risk management and business
+          continuity. He has spent years working with companies and charities to implement and
+          improve their management systems, and currently acts as chief ISO consultant to
+          St John of God Hospitaller Services, a national UK charity.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec reg-block" id="commitment">
+    <div class="sec-head">
+      <span class="eyebrow">Our commitment</span>
+      <h2>We hold ourselves to what we ask of others</h2>
+    </div>
+    <div class="reg-grid">
+      <div class="rcard">
+        <h3>Honest advice</h3>
+        <p>Including when the honest answer is that you do not need what we sell.</p>
+      </div>
+      <div class="rcard">
+        <h3>Fair treatment</h3>
+        <p>In our own work, and in what we recommend to others.</p>
+      </div>
+      <div class="rcard">
+        <h3>Our own impact</h3>
+        <p>Accounted for, environmental and otherwise, rather than only advising others to account
+          for theirs.</p>
+      </div>
+      <div class="rcard">
+        <h3>Something given back</h3>
+        <p>Using what we know to help organisations that could not otherwise afford the help.</p>
+      </div>
+    </div>
+
+    <p class="lede big">Business can be a force for good. When ambition is joined to integrity and
+      principle, success means more than profit.</p>
+    <p class="tagline">Growth through integrity.</p>
+  </section>
+
+</div>
+<footer>
+    <p>Sentinel Business Solutions · Building Better Businesses Through Compliance.</p>
+    <p class="rev">Document counts verified against the packs · reviewed 26 August 2026</p>
+  </footer><script>
+/* Compose the message and hand it to the visitor's email client.
+   No network call, nothing stored, nothing sent from this page. */
+(function () {
+  var form = document.getElementById('ecosContact');
+  if (!form) return;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = form.elements;
+    if (!f.name.value.trim() || !f.from.value.trim() || !f.message.value.trim()) {
+      form.reportValidity();
+      return;
+    }
+    var body =
+      'From: ' + f.name.value.trim() +
+      (f.org.value.trim() ? '\nOrganisation: ' + f.org.value.trim() : '') +
+      '\nReply to: ' + f.from.value.trim() +
+      '\n\n' + f.message.value.trim();
+    window.location.href =
+      'mailto:jallen@sentinelbusinesssolutions.net' +
+      '?subject=' + encodeURIComponent(f.subject.value.trim() || 'ECOS enquiry') +
+      '&body=' + encodeURIComponent(body);
+  });
+})();
+</script>
+<script>
+/* Height reporting.
+ *
+ * A Wix HTML embed is an iframe with a height fixed in the editor. That height
+ * has to be right at every breakpoint, and it never is: this page is far taller
+ * stacked on a phone than it is in three columns on a desktop, so a height that
+ * fits one leaves a gap or a scrollbar on the other. Setting it by hand, twice,
+ * for every page, is the painful way.
+ *
+ * So the page measures itself and tells the parent. Two routes, because which
+ * one works depends on how the embed was added:
+ *
+ *   Wix.setHeight  works when the component loads the Wix SDK.
+ *   postMessage    works everywhere, but needs six lines of Velo on the page
+ *                  to listen. See the snippet supplied with this file.
+ *
+ * Both fire on load, on resize, when webfonts finish (which changes wrapping),
+ * and whenever anything in the body changes size. The two timeouts catch late
+ * images. Sending the same height twice is harmless.
+ */
+(function(){
+  var last = 0;
+  function report(){
+    try{
+      var h = Math.ceil(document.documentElement.getBoundingClientRect().height) + 8;
+      if (Math.abs(h - last) < 2) return;   // ignore sub-pixel jitter
+      last = h;
+      if (window.Wix && Wix.setHeight) Wix.setHeight(h);
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ sentinelHeight: h }, '*');
+      }
+    }catch(e){}
+  }
+  window.addEventListener('load', report);
+  window.addEventListener('resize', report);
+  window.addEventListener('orientationchange', function(){ setTimeout(report, 300); });
+  if ('ResizeObserver' in window) new ResizeObserver(report).observe(document.body);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(report);
+  document.addEventListener('DOMContentLoaded', report);
+  setTimeout(report, 400); setTimeout(report, 1600); setTimeout(report, 4000);
+})();
+</script>
+<script>
+/* Escaping the embed.
+ *
+ * A Wix HTML embed is a sandboxed iframe. Links marked target="_top" are the
+ * normal way to break out of it and navigate the real page, but the browser
+ * only permits that if the iframe's sandbox grants top-level navigation. When
+ * it does not, the click is refused SILENTLY: no error, no console message,
+ * no URL change. Every nav link, footer link and card in this page uses
+ * target="_top", so they all fail together and it looks like the buttons are
+ * dead.
+ *
+ * This handler tries three routes in order and stops at the first that works,
+ * so it is correct whether or not the sandbox is the actual cause:
+ *
+ *   1. Set the top window's location directly. Works when permitted; throws a
+ *      SecurityError when not, which is caught.
+ *   2. Ask the parent page to navigate, for sites running the Velo snippet.
+ *      Costs nothing if nobody is listening.
+ *   3. Open in a new tab, which sandboxes allow far more readily than
+ *      top-navigation. Not ideal, but a new tab beats a dead button.
+ *
+ * Deliberately NOT intercepted:
+ *   - in-page anchors (#assess), which must scroll rather than navigate
+ *   - anything with a download attribute, which would lose the filename
+ *   - mailto and tel, which the browser handles better than we can
+ */
+(function () {
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+
+    var raw = a.getAttribute('href') || '';
+    if (!raw || raw.charAt(0) === '#') return;
+    if (a.hasAttribute('download')) return;
+    if (/^(mailto:|tel:)/i.test(raw)) return;
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) return;
+
+    var url = a.href;
+    e.preventDefault();
+
+    try {
+      if (window.top && window.top !== window) {
+        window.top.location.href = url;
+        return;
+      }
+      window.location.href = url;
+      return;
+    } catch (err) { /* sandbox refused it; fall through */ }
+
+    try {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ sentinelNavigate: url }, '*');
+      }
+    } catch (err) {}
+
+    window.open(url, '_blank', 'noopener');
+  }, true);
+})();
+</script>
+</body>
+</html>
