@@ -492,8 +492,6 @@ footer .rev{margin-left:auto}
 @keyframes heroIn{to{opacity:1;transform:none}}
 @keyframes fadeIn{to{opacity:1}}
 
-/* the one piece of decoration, and it stays at the top of the page */
-.phero{will-change:transform}
 
 /* the counter needs a fixed width or the layout jitters as digits change */
 .fact .v{font-variant-numeric:tabular-nums}
@@ -518,7 +516,6 @@ footer .rev{margin-left:auto}
   .phero h1,.phero .eyebrow,.phero .standfirst,.phero .hero-actions{
     opacity:1;transform:none;animation:none}
   .sc-card:hover,.btn:active,.sc-buy:active{transform:none}
-  .phero{transform:none !important}
 }
 
 
@@ -619,8 +616,6 @@ footer .rev{margin-left:auto}
 @keyframes heroIn{to{opacity:1;transform:none}}
 @keyframes fadeIn{to{opacity:1}}
 
-/* the one piece of decoration, and it stays at the top of the page */
-.phero{will-change:transform}
 
 /* the counter needs a fixed width or the layout jitters as digits change */
 .fact .v{font-variant-numeric:tabular-nums}
@@ -645,7 +640,6 @@ footer .rev{margin-left:auto}
   .phero h1,.phero .eyebrow,.phero .standfirst,.phero .hero-actions{
     opacity:1;transform:none;animation:none}
   .sc-card:hover,.btn:active,.sc-buy:active{transform:none}
-  .phero{transform:none !important}
 }
 
 /* ── card imagery ───────────────────────────────────────────────────────────
@@ -757,6 +751,32 @@ circle.tl-watch,circle.tl-stable{stroke:#fff;stroke-width:2}
 @media (max-width:640px){
   .tlwrap{margin-left:-16px;margin-right:-16px;padding:0 16px}
 }
+
+/* ── filter bar ─────────────────────────────────────────────────────────────
+   The dynamic part that is also the useful part: one tap takes sixteen cards
+   to three. Nothing is hidden that cannot be got back in one click, and the
+   count tells you what you are looking at. */
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:22px 0 26px}
+.fchip{appearance:none;border:1px solid var(--border);background:var(--surface);
+  color:var(--dim);font-family:'Space Grotesk',sans-serif;font-size:13px;
+  font-weight:600;padding:8px 15px;border-radius:999px;cursor:pointer;
+  transition:background .18s ease,color .18s ease,border-color .18s ease,
+             transform .16s cubic-bezier(.23,1,.32,1)}
+@media (hover:hover) and (pointer:fine){
+  .fchip:hover{border-color:var(--blue);color:var(--blue-d)}
+}
+.fchip:active{transform:scale(.97)}
+.fchip[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+.fchip.fchip-action[aria-pressed="true"]{background:#D97706;border-color:#D97706}
+.fcount{font-size:13px;color:var(--faint);margin-left:auto;white-space:nowrap}
+
+/* hidden cards collapse out of the grid rather than being removed, so nothing
+   is rebuilt and the remaining cards simply reflow */
+.sc-wrap[hidden],a.sc[hidden]{display:none}
+.sc-wrap.filtering,a.sc.filtering{opacity:0;transform:translateY(-6px);
+  transition:opacity .2s ease,transform .2s cubic-bezier(.23,1,.32,1)}
+
+.fempty{padding:26px 0;color:var(--dim);font-size:15px}
 </style>
 </head>
 <body>
@@ -1650,24 +1670,102 @@ circle.tl-watch,circle.tl-stable{stroke:#fff;stroke-width:2}
     function(el){ numIo.observe(el); }
   );
 
-  /* 3. HERO PARALLAX
-        The only decorative effect, and it is confined to the top of the page.
-        Keyed to this page's own scroll, so inside an iframe that does not
-        scroll it simply never fires. Uses requestAnimationFrame rather than
-        running on every scroll event. */
-  var hero = document.querySelector('.phero');
-  if (hero) {
-    var ticking = false;
-    window.addEventListener('scroll', function(){
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(function(){
-        var y = window.scrollY || window.pageYOffset || 0;
-        if (y < 700) hero.style.transform = 'translateY(' + (y * 0.14) + 'px)';
-        ticking = false;
-      });
-    }, { passive: true });
+  /* 3. HERO PARALLAX — REMOVED
+        It translated the whole hero downward on scroll, which slid it over the
+        stats below and covered the counting numbers. The overlap grew with
+        scroll distance: 12px at 400, 40px at 600, worse further down.
+
+        This is the exact failure the rule about motion exists to prevent. The
+        effect was the only purely decorative thing on the page and it was
+        obscuring content, so it goes rather than gets tuned. A parallax that
+        works would need a separate background layer behind the hero, which is
+        a lot of structure for an effect nobody asked for. */
+
+})();
+</script>
+<script>
+/* Standards filter. Progressive: with JavaScript off the bar never appears and
+   all sixteen cards are visible, which is the correct fallback. */
+(function(){
+  var grid = document.querySelector('#packs .grid') ||
+             document.querySelector('.grid');
+  if (!grid) return;
+
+  var cards = [].slice.call(grid.querySelectorAll('.sc-wrap, a.sc'));
+  if (cards.length < 6) return;
+
+  var THEMES = {"quality":{label:"Quality & product",cats:["Quality management", "Medical device quality", "Food safety"]},"environment":{label:"Environment & energy",cats:["Environmental management", "Energy management", "Event sustainability"]},"safety":{label:"Health & safety",cats:["Occupational health and safety", "Road traffic safety"]},"security":{label:"Security & IT",cats:["Information security", "Security management", "IT service management", "AI management"]},"operations":{label:"Operations",cats:["Business continuity", "Facility management", "Collaborative business relationships", "Innovation management"]}};
+  var ACTION = ["ISO 9001", "ISO 14001", "ISO 27001"];
+
+  /* tag every card from what it already says, rather than from a second list
+     that could drift out of step with the markup */
+  cards.forEach(function(c){
+    var cat = (c.querySelector('.cat') || {}).textContent || '';
+    var ttl = (c.querySelector('.ttl') || {}).textContent || '';
+    c.dataset.theme = '';
+    for (var k in THEMES) {
+      if (THEMES[k].cats.indexOf(cat.trim()) > -1) c.dataset.theme = k;
+    }
+    c.dataset.action = ACTION.indexOf(ttl.trim()) > -1 ? '1' : '';
+  });
+
+  var bar = document.createElement('div');
+  bar.className = 'filters';
+  bar.setAttribute('role', 'group');
+  bar.setAttribute('aria-label', 'Filter standards');
+
+  function chip(label, key, cls){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'fchip' + (cls ? ' ' + cls : '');
+    b.textContent = label;
+    b.dataset.key = key;
+    b.setAttribute('aria-pressed', key === 'all' ? 'true' : 'false');
+    bar.appendChild(b);
+    return b;
   }
+
+  chip('All standards', 'all');
+  for (var k in THEMES) chip(THEMES[k].label, k);
+  chip('Needs action', 'action', 'fchip-action');
+
+  var count = document.createElement('span');
+  count.className = 'fcount';
+  count.setAttribute('aria-live', 'polite');
+  bar.appendChild(count);
+
+  grid.parentNode.insertBefore(bar, grid);
+
+  function apply(key){
+    var shown = 0;
+    cards.forEach(function(c){
+      var match = key === 'all' ||
+                  (key === 'action' ? c.dataset.action === '1'
+                                    : c.dataset.theme === key);
+      if (match) {
+        c.hidden = false;
+        requestAnimationFrame(function(){ c.classList.remove('filtering'); });
+        shown++;
+      } else {
+        c.classList.add('filtering');
+        setTimeout(function(){ if (c.classList.contains('filtering')) c.hidden = true; }, 200);
+      }
+    });
+    count.textContent = shown === cards.length
+      ? cards.length + ' standards'
+      : shown + ' of ' + cards.length + ' standards';
+  }
+
+  bar.addEventListener('click', function(e){
+    var b = e.target.closest('button.fchip');
+    if (!b) return;
+    [].forEach.call(bar.querySelectorAll('.fchip'), function(x){
+      x.setAttribute('aria-pressed', x === b ? 'true' : 'false');
+    });
+    apply(b.dataset.key);
+  });
+
+  apply('all');
 })();
 </script>
 </body>
